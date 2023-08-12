@@ -1,0 +1,52 @@
+{
+    "name": "johns-cypher-addons",
+    "title": "johns-cypher-addons",
+    "description": "Enhances the experience for seasoned FoundryVTT users with the CypherSystem.",
+    "version": "1.0.00",
+    "library": "false",
+    "manifestPlusVersion": "1.0.0",
+    "minimumCoreVersion": "0.8.9",
+    "compatibleCoreVersion": "9.000",
+    "author": "John",
+    "system": "cyphersystem",
+    "relationships":{
+        "systems": [
+            {
+                "id": "cyphersystem",
+                "type": "system",
+                "manifest": "https://raw.githubusercontent.com/mrkwnzl/cyphersystem-foundryvtt/main/system.json",
+                "compatibility": {
+                    "verified": "1.33.3"
+                }
+            }
+        ]
+    },
+    "esmodules": [
+        "module/module.js"
+    ],
+    "dependencies": [
+        {
+            "name": "cyphersystem",
+            "id": "cyphersystem",
+            "type": "system"
+        },
+        {
+            "name": "socketlib",
+            "type": "module"
+        }
+    ],
+    "languages": [
+        {
+            "lang": "en",
+            "name": "English",
+            "path": "lang/en.json"
+        },
+        {
+            "lang": "pt_BR",
+            "name": "Português Brasileiro",
+            "path": "lang/pt_BR.json"
+        }
+    ],
+    "socket": true
+} 
+    

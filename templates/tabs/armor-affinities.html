@@ -1,0 +1,52 @@
+<div class="tab affinities" id="affinitiesTab" data-group="primary" data-tab="affinities">
+    <div class="flexrow">
+        <ol class="items-list">
+            <li class="item flexrow item-header">
+                <div class="item-name">{{localize 'JOHNSCYPHERADDONS.Affinities'}}</div>
+            </li>
+            {{#if data.actor}}
+                {{#with (find data.actor.items "id" item.id) as |element|}}
+                    {{#each element.data.flags.johns-cypher-addons.affinities as |affinity|}}
+                    <li class="item resource-content flexrow">
+                        <h4 class="item-name">
+                          <a class="item-control item-description" title="{{@key}}">
+                            {{@key}}
+                          </a>
+                        </h4>
+                        <div class="item-controls" {{#unless actor.isGM}}disabled{{/unless}}>  
+                          <select class="affinity" id="affinity-select" style="width: 120px" data-item-id="{{element.id}}"  data-item-actor-id="{{element.actor.id}}" data-key="{{@key}}">
+                            {{#select affinity}}
+                              <option value=""></option>
+                              <option value="weak">{{localize 'JOHNSCYPHERADDONS.Weak'}}</option>
+                              <option value="resistance">{{localize 'JOHNSCYPHERADDONS.Resistant'}}</option>
+                              <option value="immune">{{localize 'JOHNSCYPHERADDONS.Immune'}}</option>
+                            {{/select}}
+                          </select>
+                        </div>
+                      </li>
+                    {{/each}}
+                {{/with}}
+            {{else}}
+                {{#each item.data.flags.johns-cypher-addons.affinities as |affinity|}}
+                    <li class="item resource-content flexrow">
+                        <h4 class="item-name">
+                            <a class="item-control item-description" title="{{@key}}">
+                                {{@key}}
+                            </a>
+                        </h4>
+                        <div class="item-controls" {{#unless actor.isGM}}disabled{{/unless}}>  
+                            <select class="affinity" id="affinity-select" style="width: 120px" data-item-id="{{../item.id}}" data-key="{{@key}}">
+                                {{#select affinity}}
+                                <option value=""></option>
+                                <option value="weak">{{localize 'JOHNSCYPHERADDONS.Weak'}}</option>
+                                <option value="resistance">{{localize 'JOHNSCYPHERADDONS.Resistant'}}</option>
+                                <option value="immune">{{localize 'JOHNSCYPHERADDONS.Immune'}}</option>
+                                {{/select}}
+                            </select>
+                        </div>
+                    </li>
+                {{/each}}
+            {{/if}}            
+        </ol>
+    </div>
+</div>
