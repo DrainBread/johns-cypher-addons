@@ -1,12 +1,89 @@
 <div class="tab effects" id="effectsTab" data-group="primary" data-tab="effects">
-    <div class="flexrow">
-        <ol class="items-list">
-            <li class="item flexrow item-header">
-                <div class="item-name">{{localize 'JOHNSCYPHERADDONS.ActiveEffects'}}</div>
-            </li>
-            <!-- DAE form modified -->
-            <!-- Save to flags when modified -->
-            <!-- Read from flags when rolled, payed or casted -->
-        </ol>
-    </div>
+    <ol class="items-list">
+        <li class="item flexrow item-header item-name">
+            <div class="item-name">
+                <i class="fas fa-book"></i>{{localize 'JOHNSCYPHERADDONS.Details'}}
+            </div>
+        </li>
+
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.EffectLabel' }}</label>
+            <input type="text" class="label" value="{{ item.data.flags.johns-cypher-addons.effects.label }}" />
+        </li>
+
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.EffectIcon' }}</label>
+            <div class="flexrow">
+                <img style="max-height:27px; max-width:27px; margin-top:1%" src="{{item.data.flags.johns-cypher-addons.effects.icon}}">
+                {{filePicker target="icon" type="image"}}
+                <input class="image icon" type="text" style="margin-left:1%" placeholder="path/image.png" value="{{item.data.flags.johns-cypher-addons.effects.icon}}" />    
+            </div>
+            
+        </li>   
+        
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.ApplyInInventory' }}</label>
+            <input type="checkbox" class="applyFromInventory" {{ checked item.data.flags.johns-cypher-addons.effects.applyFromInventory }} />
+        </li>
+
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.Stackable'}}</label>
+            <select class="stacks">
+                {{#select item.data.flags.johns-cypher-addons.effects.stacks }}
+                    <option value="notByOrigin">{{localize 'JOHNSCYPHERADDONS.DontStackByOrigin'}}</option>
+                    <option value="notByName">{{localize 'JOHNSCYPHERADDONS.DontStackByName'}}</option>
+                    <option value="reapply">{{localize 'JOHNSCYPHERADDONS.StacksReaplies'}}</option>
+                    <option value="increase">{{localize 'JOHNSCYPHERADDONS.StacksIncrease'}}</option>
+                {{/select}}
+            </select>
+        </li>
+    </ol>
+
+    <ol class="items-list">
+        <li class="item flexrow item-header item-name">
+            <div class="item-name">
+                <i class="fas fa-clock"></i>{{localize 'JOHNSCYPHERADDONS.Duration'}}
+            </div>
+        </li>
+
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.DurationTurns'}}</label>
+            <div class="flexrow">
+              <label for="rounds" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Rounds'}}</label>
+              <input type="number" name="rounds" class="rounds" value="{{item.data.flags.johns-cypher-addons.effects.rounds}}" />
+              <label for="turns" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Turns'}}</label>
+              <input type="number" name="turns" class="turns" value="{{item.data.flags.johns-cypher-addons.effects.turns}}" />
+            </div>
+        </li>
+
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.StartTurns'}}</label>
+            <div class="flexrow">
+                <label for="round" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Round'}}</label>
+                <input type="number" name="round" class="round" value="{{item.data.flags.johns-cypher-addons.effects.round}}" />
+                <label for="turn" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Turn'}}</label>
+                <input type="number" name="turn" class="turn" value="{{item.data.flags.johns-cypher-addons.effects.turn}}" />
+            </div>
+        </li>
+      
+        <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.MacroRepeat'}}</label>
+            <select class="macro-repeat">
+                {{#select item.data.flags.johns-cypher-addons.effects.macroRepeat}}
+                    <option value=""></option>
+                    <option value="start">{{localize 'JOHNSCYPHERADDONS.MacroRepeatStart'}}</option>
+                    <option value="end">{{localize 'JOHNSCYPHERADDONS.MacroRepeatEnd'}}</option>
+                {{/select}}
+            </select>
+        </li>          
+    </ol>
+
+    <ol class="items-list">
+        <li class="item flexrow item-header item-name">
+            <div class="item-name">
+                <i class="fas fa-cogs"></i>{{localize 'JOHNSCYPHERADDONS.Effects'}}
+            </div>
+        </li>
+        <!-- List of effects -->
+    </ol>
 </div>

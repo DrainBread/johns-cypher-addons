@@ -4,31 +4,16 @@
             <li class="item flexrow item-header">
                 <div class="item-name">{{localize 'JOHNSCYPHERADDONS.Tags'}}</div>
             </li>
-            {{#if data.actor}}
-                {{#with (find data.actor.items "id" item.id) as |element|}}
-                    {{#each (sort element.data.flags.johns-cypher-addons.tags) as |tag|}}
-                    <li class="item resource-content flexrow">
-                        <h4 class="item-name">
-                            <a class="item-control item-description" title="{{@key}}">
-                                {{@key}}
-                            </a>
-                        </h4>
-                        <input class="tag" {{#if data.isObserver}}disabled{{/if}} data-item-id="{{element.id}}" data-item-actor-id="{{element.actor.id}}" data-key="{{@key}}" type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleItemTag'}}" {{#if tag}}checked{{/if}}>
-                    </li>
-                    {{/each}}
-                {{/with}}
-            {{else}}
-                {{#each (sort item.data.flags.johns-cypher-addons.tags) as |tag|}}
-                <li class="item resource-content flexrow">
-                    <h4 class="item-name">
-                        <a class="item-control item-description" title="{{@key}}">
-                            {{@key}}
-                        </a>
-                    </h4>
-                    <input class="tag" {{#if data.isObserver}}disabled{{/if}} data-item-id="{{../item.id}}" data-key="{{@key}}" type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleItemTag'}}" {{#if tag}}checked{{/if}}>
-                </li>
-                {{/each}}
-            {{/if}}
+            {{#each (sort item.data.flags.johns-cypher-addons.tags) as |tag|}}
+            <li class="item resource-content flexrow">
+                <h4 class="item-name">
+                    <a class="item-control item-description" title="{{@key}}">
+                        {{@key}}
+                    </a>
+                </h4>
+                <input class="tag" {{#if data.isObserver}}disabled{{/if}} data-key="{{@key}}" type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleItemTag'}}" {{checked tag}}>
+            </li>
+            {{/each}}
         </ol>
     </div>
 </div>

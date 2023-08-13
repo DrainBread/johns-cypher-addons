@@ -37,5 +37,25 @@
     "JOHNSCYPHERADDONS.Weak": "Fraco",
     "JOHNSCYPHERADDONS.Resist": "Resistente",
     "JOHNSCYPHERADDONS.Immune": "Imune",
-    "JOHNSCYPHERADDONS.ActiveEffects": "Efeitos Ativos"    
+    "JOHNSCYPHERADDONS.ActiveEffects": "Efeitos Ativos",
+    "JOHNSCYPHERADDONS.Details": "Detalhes",
+    "JOHNSCYPHERADDONS.Duration": "Duração",
+    "JOHNSCYPHERADDONS.EffectLabel": "Nome do Efeito",
+    "JOHNSCYPHERADDONS.EffectIcon": "Ícone do Efeito",
+    "JOHNSCYPHERADDONS.ApplyInInventory": "Aplicar Efeito No Inventário",
+    "JOHNSCYPHERADDONS.Stackable": "Empilhar Efeitos",
+    "JOHNSCYPHERADDONS.DontStackByOrigin": "Não empilhar com mesma origem",
+    "JOHNSCYPHERADDONS.DontStackByName": "Não empilhar com mesmo nome",
+    "JOHNSCYPHERADDONS.StacksReaplies": "Empilhar reaplica o efeito",
+    "JOHNSCYPHERADDONS.StacksIncrease": "Empilhar aumenta a contagem da pilha em 1",
+    "JOHNSCYPHERADDONS.DurationTurns": "Turnos de Duração",
+    "JOHNSCYPHERADDONS.Rounds": "Rodadas",
+    "JOHNSCYPHERADDONS.Turns": "Turnos",
+    "JOHNSCYPHERADDONS.StartTurns": "Turno de Início",
+    "JOHNSCYPHERADDONS.Round": "Rodada",
+    "JOHNSCYPHERADDONS.Turn": "Turno",
+    "JOHNSCYPHERADDONS.MacroRepeat": "Repetir Macro",
+    "JOHNSCYPHERADDONS.MacroRepeatStart": "Início do Turno",
+    "JOHNSCYPHERADDONS.MacroRepeatEnd": "Fim do Turno"
+
 }

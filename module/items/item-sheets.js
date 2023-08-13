@@ -15,114 +15,73 @@ export class CustomSheetItem extends CypherItemSheet {
         
         /** UPDATE ATTACK AFFINITIES */
         html.find('.affinity').change(event => {
-
-            const itemID = event.target.dataset.itemId;
-            const key = event.target.dataset.key;
-            let item = game.items.get(itemID);
-
-            if(!item){
-                /** UPDATE ACTOR OWNED armor */
-                const actor = game.actors.get(event.target.dataset.itemActorId);
-                let item = Array.from(actor.data.items).find( i => i.id == itemID);
-                let affinities = item.getFlag('johns-cypher-addons', 'affinities');
-                affinities[key] = event.target.checked;
-
-                item.setFlag('johns-cypher-addons', 'affinities', affinities);          
-            } else {
-                /** UPDATE NOT-OWNED armorS */
-                let affinities = item.getFlag('johns-cypher-addons', 'affinities');
-                affinities[key] = event.target.checked;
-                item.setFlag('johns-cypher-addons', 'affinities', affinities);          
-            }
+            this.item.setFlag('johns-cypher-addons', 'affinities', { [event.target.dataset.key] : event.target.checked});     
         });
 
         /** UPDATE armor AFFINITIES */
         html.find('select.affinity').change(event => {
-
-            const itemID = event.target.dataset.itemId;
-            const key = event.target.dataset.key;
-            let item = game.items.get(itemID);
-
-            if(!item){
-                /** UPDATE ACTOR OWNED armor */
-                const actor = game.actors.get(event.target.dataset.itemActorId);
-                let item = Array.from(actor.data.items).find( i => i.id == itemID);
-                item.setFlag('johns-cypher-addons','affinities', { [key] : event.target.value });   
-            } else {
-                /** UPDATE NOT-OWNED armorS */
-                item.setFlag('johns-cypher-addons','affinities', { [key] : event.target.value });           
-            }
+            this.item.setFlag('johns-cypher-addons','affinities', { [event.target.dataset.key] : event.target.value });
         });
 
         /** UPDATE TAGS */
         html.find('input.tag').change(event => {
-
-            const itemID = event.target.dataset.itemId;
-            const key = event.target.dataset.key;
-            let item = game.items.get(itemID);
-            
-            if(!item){
-                /** UPDATE ACTOR OWNED armor */
-                const actor = game.actors.get(event.target.dataset.itemActorId);
-                let item = Array.from(actor.data.items).find( i => i.id == itemID);
-                let tags = item.getFlag('johns-cypher-addons', 'tags');
-                tags[key] = event.target.checked;
-
-                item.setFlag('johns-cypher-addons', 'tags', tags);          
-            } else {
-                /** UPDATE NOT-OWNED armorS */
-                let tags = item.getFlag('johns-cypher-addons', 'tags');
-                tags[key] = event.target.checked;
-                item.setFlag('johns-cypher-addons', 'tags', tags);          
-            }
+            this.item.setFlag('johns-cypher-addons', 'tags', { [event.target.dataset.key] : event.target.checked });
         });        
 
-        // TODO: Effects
+        /** EFFECTS */
+
+            /** UPDATE EFFECT DETAILS */
+        html.find('input.label').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"label": event.target.value});
+        });
+
+        html.find('input.icon').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"icon": event.target.value});
+        });
+
+        html.find('input.applyFromInventory').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"applyFromInventory": event.target.checked});
+        });
+
+        html.find('select.stacks').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"stacks": event.target.value});
+        });
+
+            /** UPDATE EFFECT DURATION */
+
+        html.find('input.rounds').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"rounds": event.target.value});
+        });
+
+        html.find('input.turns').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"turns": event.target.value});
+        });
+
+        html.find('input.round').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"round": event.target.value});
+        });
+        
+        html.find('input.turn').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"turn": event.target.value});
+        });
+
+        html.find('select.macro-repeat').change(event => {
+            this.item.setFlag('johns-cypher-addons', 'effects', {"macroRepeat": event.target.value});
+        });
 
         /** TOGGLE THROWING ATTACK */
         html.find('input.throwing').change(event => {
-            const itemID = event.target.dataset.itemId;
-            let item = game.items.get(itemID);
-
-            if(!item){
-                /** UPDATE ACTOR OWNED armor */
-                const actor = game.actors.get(event.target.dataset.itemActorId);
-                let item = Array.from(actor.data.items).find( i => i.id == itemID);
-                item.setFlag('johns-cypher-addons', 'additionalSettings', {"throwing": event.target.checked});
-
-            } else {
-                /** UPDATE NOT-OWNED armorS */
-                item.setFlag('johns-cypher-addons', 'additionalSettings', {"throwing": event.target.checked});     
-            }
+            this.item.setFlag('johns-cypher-addons', 'additionalSettings', {"throwing": event.target.checked});
         });
 
         /** TOGGLE ATTACK REQUIRES ammo */
         html.find('input.requiresAmmo').change(event => {
-            const itemID = event.target.dataset.itemId;
-            let item = game.items.get(itemID);
-
-            if(!item){
-                /** UPDATE ACTOR OWNED armor */
-                const actor = game.actors.get(event.target.dataset.itemActorId);
-                let item = Array.from(actor.data.items).find( i => i.id == itemID);
-                item.setFlag('johns-cypher-addons', 'additionalSettings', {"requiresAmmo" : event.target.checked, "ammoID": null});
-
-            } else {
-                /** UPDATE NOT-OWNED armorS */
-                item.setFlag('johns-cypher-addons', 'additionalSettings', {"requiresAmmo": event.target.checked, "ammoID": null});     
-            }
+            this.item.setFlag('johns-cypher-addons', 'additionalSettings', {"requiresAmmo": event.target.checked, "ammoID": null});     
         });
 
         /** CHANGE EQUIPPED ammo */
         html.find('#ammo-select').change(event => {
-            const itemID = event.target.dataset.itemId;
-            let item = game.items.get(itemID);
-
-            if(!item){
-                const actor = game.actors.get(event.target.dataset.itemActorId);
-                item = Array.from(actor.data.items).find( i => i.id == itemID);
-                item.setFlag('johns-cypher-addons','additionalSettings', {"ammoID": event.target.value});
-            }
+            this.item.setFlag('johns-cypher-addons','additionalSettings', {"ammoID": event.target.value});
         });
     }
 
