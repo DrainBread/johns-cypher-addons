@@ -1,6 +1,6 @@
 import * as Utils from "../utilities/utils.js";
 
-export const supportedTypes = ['ammo','armor','ARTIFACT','attack','CYPHER','EQUIPMENT','MATERIAL','ODDITY'];
+export const supportedTypes = ['ammo','armor','artifact','attack','cypher','equipment','material','oddity'];
 
 export async function initialize(){
 
@@ -54,6 +54,13 @@ export async function initialize(){
           }
         }
 
+        /** ADD DEFAULT VALUES TO EFFECTS OF EXISTING ITEMS */
+        if(!item.type.includes('skill')){
+          if(!item.getFlag('johns-cypher-addons', 'effects')){
+            item.setFlag('johns-cypher-addons', 'effects', { 'stacks': 'notByOrigin', 'enabled': false});
+          }
+        }
+
         /** ADD ITEM TAGS */
         if(item.getFlag('johns-cypher-addons', 'tags')){
           let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'tags'),  Utils.clone(itemTags));
@@ -100,6 +107,13 @@ export async function initialize(){
           item.setFlag('johns-cypher-addons', 'affinities', flag);
         } else {
           item.setFlag('johns-cypher-addons', 'affinities', Utils.clone(affinities));          
+        }
+      }
+
+      /** ADD DEFAULT VALUES TO EFFECTS OF EXISTING ITEMS */
+      if(!item.type.includes('skill')){
+        if(!item.getFlag('johns-cypher-addons', 'effects')){
+          item.setFlag('johns-cypher-addons', 'effects', { 'stacks': 'notByOrigin', 'enabled': false});
         }
       }
       

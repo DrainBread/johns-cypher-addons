@@ -1,4 +1,4 @@
-<div class="tab effects" id="effectsTab" data-group="primary" data-tab="effects">
+<div class="tab effects" id="effectsTab" data-group="primary" data-tab="effects" {{#unless actor.isGM}}disabled{{/unless}}>
     <ol class="items-list">
         <li class="item flexrow item-header item-name">
             <div class="item-name">
@@ -7,8 +7,13 @@
         </li>
 
         <li class="item flexrow item-settings">
+            <label>{{localize 'JOHNSCYPHERADDONS.EffectEnable' }}</label>
+            <input type="checkbox" class="enable" {{checked item.data.flags.johns-cypher-addons.effects.enabled }}/>
+        </li>
+
+        <li class="item flexrow item-settings">
             <label>{{localize 'JOHNSCYPHERADDONS.EffectLabel' }}</label>
-            <input type="text" class="label" value="{{ item.data.flags.johns-cypher-addons.effects.label }}" />
+            <input type="text" class="label" value="{{ item.data.flags.johns-cypher-addons.effects.label }}"/>
         </li>
 
         <li class="item flexrow item-settings">
@@ -16,7 +21,7 @@
             <div class="flexrow">
                 <img style="max-height:27px; max-width:27px; margin-top:1%" src="{{item.data.flags.johns-cypher-addons.effects.icon}}">
                 {{filePicker target="icon" type="image"}}
-                <input class="image icon" type="text" style="margin-left:1%" placeholder="path/image.png" value="{{item.data.flags.johns-cypher-addons.effects.icon}}" />    
+                <input class="image icon" type="text" name="icon" style="margin-left:1%" placeholder="path/image.png" value="{{item.data.flags.johns-cypher-addons.effects.icon}}" />    
             </div>
             
         </li>   
@@ -50,9 +55,9 @@
             <label>{{localize 'JOHNSCYPHERADDONS.DurationTurns'}}</label>
             <div class="flexrow">
               <label for="rounds" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Rounds'}}</label>
-              <input type="number" name="rounds" class="rounds" value="{{item.data.flags.johns-cypher-addons.effects.rounds}}" />
+              <input type="number" name="rounds" class="rounds" value="{{item.data.flags.johns-cypher-addons.effects.duration.rounds}}" />
               <label for="turns" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Turns'}}</label>
-              <input type="number" name="turns" class="turns" value="{{item.data.flags.johns-cypher-addons.effects.turns}}" />
+              <input type="number" name="turns" class="turns" value="{{item.data.flags.johns-cypher-addons.effects.duration.turns}}" />
             </div>
         </li>
 
@@ -60,9 +65,9 @@
             <label>{{localize 'JOHNSCYPHERADDONS.StartTurns'}}</label>
             <div class="flexrow">
                 <label for="round" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Round'}}</label>
-                <input type="number" name="round" class="round" value="{{item.data.flags.johns-cypher-addons.effects.round}}" />
+                <input type="number" name="round" class="round" value="{{item.data.flags.johns-cypher-addons.effects.duration.startRound}}" />
                 <label for="turn" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Turn'}}</label>
-                <input type="number" name="turn" class="turn" value="{{item.data.flags.johns-cypher-addons.effects.turn}}" />
+                <input type="number" name="turn" class="turn" value="{{item.data.flags.johns-cypher-addons.effects.duration.startTurn}}" />
             </div>
         </li>
       
@@ -84,6 +89,67 @@
                 <i class="fas fa-cogs"></i>{{localize 'JOHNSCYPHERADDONS.Effects'}}
             </div>
         </li>
-        <!-- List of effects -->
+        <li>
+            <header class="flexrow">
+                <div class="key" style="padding-right:2px">{{localize 'JOHNSCYPHERADDONS.AttributeKey'}}</div>
+                
+                <div class="flexrow">
+                    <div class="mode" style="padding-right:1px;padding-left:1px;min-width:100px">{{localize 'JOHNSCYPHERADDONS.ChangeMode'}}</div>
+                    <div class="value" style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.AttributeValue'}}</div>
+                    <div class="priority" style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.EffectPriority'}}</div>
+                </div>
+
+                <div class="item-controls">
+                    <a class="item-control add-effect">
+                        <i class="far fa-plus-square"></i>
+                    </a>
+                </div>
+
+            </header>
+
+            <ol class="items-list" style="padding:0px">
+                {{#each item.data.flags.johns-cypher-addons.effects.changes as |change id|}}
+                <li class="flexrow">
+                    <div style="padding-right:2px">
+                        <input class="attr-key" type="text" value="{{change.key}}" data-index="{{@index}}"/>
+                        <div class="flexrow">
+                            <label for="self" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Self' }}</label>
+                            <input type="checkbox" name="self" class="self" data-index="{{@index}}" {{ checked change.self }} />
+                            <label for="target-pc" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.TargetPCs' }}</label>
+                            <input type="checkbox" name="target-pc" class="target-pc" data-index="{{@index}}" {{ checked change.targetPCs }} />
+                            <label for="target-npc" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.TargetNPCs' }}</label>
+                            <input type="checkbox" name="target-npc" class="target-npc" data-index="{{@index}}" {{ checked change.targetNPCs }} />
+                        </div>
+                    </div>
+
+                    <div class="flexrow">
+                        <div style="padding-right:1px;padding-left:1px">
+                            <select class="change-mode" data-index="{{@index}}" style="min-width:100px;max-width:100px;">
+                                {{#select change.mode}}
+                                <option value="0">{{localize 'JOHNSCYPHERADDONS.Custom'}}</option>
+                                <option value="1">{{localize 'JOHNSCYPHERADDONS.Multiply'}}</option>
+                                <option value="2">{{localize 'JOHNSCYPHERADDONS.Add'}}</option>
+                                <option value="3">{{localize 'JOHNSCYPHERADDONS.Downgrade'}}</option>
+                                <option value="4">{{localize 'JOHNSCYPHERADDONS.Upgrade'}}</option>
+                                <option value="5">{{localize 'JOHNSCYPHERADDONS.Override'}}</option>
+                                {{/select}}
+                            </select>
+                        </div>
+
+                        <div style="padding-right:1px;padding-left:1px">
+                            <input type="text" class="attr-value" data-index="{{@index}}" value="{{change.value}}"/>
+                        </div>
+
+                        <div style="padding:1px;padding-top:2px">
+                            <input type="number" class="priority" data-index="{{@index}}" value="{{change.priority}}"/>
+                        </div>
+                    </div>
+
+                    <a class="item-controls remove-effect" data-index="{{@index}}"><i class="fas fa-trash" data-index="{{@index}}"></i></a>
+                </li>
+                {{/each}}
+              </ol>
+        </li>
+
     </ol>
 </div>

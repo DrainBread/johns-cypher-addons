@@ -24,10 +24,10 @@
                     <label class="settings-list">
                         {{localize 'JOHNSCYPHERADDONS.EquippedAmmo'}}
                     </label>
-                    <select class="auto-margin setting-input" id="ammo-select" style="width: 135px" data-item-actor-id="{{element.actor.id}}" data-item-id="{{element.id}}">
+                    <select class="auto-margin setting-input" id="ammo-select" style="width: 135px">
                         {{#select item.data.flags.johns-cypher-addons.additionalSettings.ammoID}}
                             <option value=""></option>
-                            {{#each (filter ../data.actor.items "type" "ammo") as |ammo|}}
+                            {{#each (filter data.actor.items "type" "ammo") as |ammo|}}
                                 {{#if (gt ammo.data.data.quantity 0)}}
                                     <option value="{{ammo.id}}">{{ammo.name}}</option>
                                 {{/if}}

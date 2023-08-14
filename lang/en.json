@@ -40,6 +40,7 @@
     "JOHNSCYPHERADDONS.ActiveEffects": "Active Effects",
     "JOHNSCYPHERADDONS.Details": "Details",
     "JOHNSCYPHERADDONS.Duration": "Duration",
+    "JOHNSCYPHERADDONS.EffectEnable": "Enable Effect",
     "JOHNSCYPHERADDONS.EffectLabel": "Effect Label",
     "JOHNSCYPHERADDONS.EffectIcon": "Effect Icon",
     "JOHNSCYPHERADDONS.ApplyInInventory": "Apply Effect From Inventory",
@@ -56,5 +57,18 @@
     "JOHNSCYPHERADDONS.Turn": "Turn",
     "JOHNSCYPHERADDONS.MacroRepeat": "Repeat Macro",
     "JOHNSCYPHERADDONS.MacroRepeatStart": "Turn Start",
-    "JOHNSCYPHERADDONS.MacroRepeatEnd": "Turn End"
+    "JOHNSCYPHERADDONS.MacroRepeatEnd": "Turn End",
+    "JOHNSCYPHERADDONS.AttributeKey": "Attribute Key",
+    "JOHNSCYPHERADDONS.ChangeMode": "Change Mode",
+    "JOHNSCYPHERADDONS.AttributeValue": "Value",
+    "JOHNSCYPHERADDONS.EffectPriority": "Priority",
+    "JOHNSCYPHERADDONS.Add": "Add",
+    "JOHNSCYPHERADDONS.Multiply": "Multiply",
+    "JOHNSCYPHERADDONS.Downgrade": "Downgrade",
+    "JOHNSCYPHERADDONS.Upgrade": "Upgrade",
+    "JOHNSCYPHERADDONS.Override": "Override",
+    "JOHNSCYPHERADDONS.Custom": "Custom",
+    "JOHNSCYPHERADDONS.Self": "On Self",
+    "JOHNSCYPHERADDONS.TargetPCs": "On PCs",
+    "JOHNSCYPHERADDONS.TargetNPCs": "On NPCs"
 }

@@ -2,19 +2,19 @@ import { loadDamageTypes, loadTags, supportedTypes } from "../init.js";
 
 export async function createItem(item){
 
-  const itemTags = await loadTags();
-
-  if(supportedTypes.includes(item.type) && !item.getFlag('johns-cypher-addons', 'tags'))
+  if(supportedTypes.includes(item.type) && !item.getFlag('johns-cypher-addons', 'tags')){
+    const itemTags = await loadTags();
     item.setFlag('johns-cypher-addons', 'tags', itemTags);
+  }
+    
 
   if((item.type == 'attack' || item.type == 'armor') && !item.getFlag('johns-cypher-addons', 'affinities')){
-    let damageTypes = await loadDamageTypes();
-    
+    const damageTypes = await loadDamageTypes();
     item.setFlag('johns-cypher-addons', 'affinities', damageTypes);
-    
   }
 
-  // TODO: Effect
+  if(!item.type.includes('skill'))
+    item.setFlag('johns-cypher-addons', 'effects', { 'stacks': 'notByOrigin', 'enabled': false});
 
 }
 
