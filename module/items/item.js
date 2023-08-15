@@ -14,7 +14,7 @@ export async function createItem(item){
   }
 
   if(!item.type.includes('skill'))
-    item.setFlag('johns-cypher-addons', 'effects', { 'stacks': 'notByOrigin', 'enabled': false});
+    item.setFlag('johns-cypher-addons', 'effects', []);
 
 }
 

@@ -57,7 +57,7 @@ export async function initialize(){
         /** ADD DEFAULT VALUES TO EFFECTS OF EXISTING ITEMS */
         if(!item.type.includes('skill')){
           if(!item.getFlag('johns-cypher-addons', 'effects')){
-            item.setFlag('johns-cypher-addons', 'effects', { 'stacks': 'notByOrigin', 'enabled': false});
+            item.setFlag('johns-cypher-addons', 'effects', []);
           }
         }
 
@@ -113,7 +113,7 @@ export async function initialize(){
       /** ADD DEFAULT VALUES TO EFFECTS OF EXISTING ITEMS */
       if(!item.type.includes('skill')){
         if(!item.getFlag('johns-cypher-addons', 'effects')){
-          item.setFlag('johns-cypher-addons', 'effects', { 'stacks': 'notByOrigin', 'enabled': false});
+          item.setFlag('johns-cypher-addons', 'effects', []);
         }
       }
       

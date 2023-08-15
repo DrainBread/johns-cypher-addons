@@ -23,6 +23,7 @@ export async function registerHandlebars() {
       gt: (v1, v2) => v1 > v2,
       lte: (v1, v2) => v1 <= v2,
       gte: (v1, v2) => v1 >= v2,
+      not: (v1) => !v1,
       and() {
           return Array.prototype.every.call(arguments, Boolean);
       },

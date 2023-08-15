@@ -70,6 +70,13 @@
     "JOHNSCYPHERADDONS.Custom": "Personalizado",
     "JOHNSCYPHERADDONS.Self": "Em Si",
     "JOHNSCYPHERADDONS.TargetPCs": "Em PCs",
-    "JOHNSCYPHERADDONS.TargetNPCs": "Em NPCs"
+    "JOHNSCYPHERADDONS.TargetNPCs": "Em NPCs",
+    "JOHNSCYPHERADDONS.Name": "Nome",
+    "JOHNSCYPHERADDONS.Mode": "Modo",
+    "JOHNSCYPHERADDONS.Value": "Valor",
+    "JOHNSCYPHERADDONS.Enabled": "Habilitado",
+    "JOHNSCYPHERADDONS.Disabled": "Desabilitado",
+    "JOHNSCYPHERADDONS.Save": "Gravar",
+    "JOHNSCYPHERADDONS.Cancel": "Cancelar"
 
 }
