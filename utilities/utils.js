@@ -1,3 +1,9 @@
+export function generateId(size=16,chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'){
+    let id = ''
+    for(let i = 0; i < 16; i++) id+=chars[Math.floor(Math.random()*chars.length)];
+    return id;
+}
+
 export function timeout(ms){
     return new Promise(resolve => setTimeout(resolve,ms));
 }
@@ -9,10 +15,10 @@ export function clone(obj){
     return JSON.parse(JSON.stringify(obj));
 }
 
-export function mergeObjects(a, b){
+export function mergeObjects(a, b, keep=false){
     let c = Object.assign(b, a);
     for(let key in c){
-        if(!b[key])
+        if(!b[key] && !keep)
             delete c[key];
     }
     return c;

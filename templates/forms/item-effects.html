@@ -1,0 +1,170 @@
+<form autocomplete="off">
+    <div id="effectsTab">
+
+        <header class="sheet-header flexrow" style="margin-bottom:5px">
+            <img style="max-width:50px;max-height:50px" src="{{effect.icon}}">
+            <h1 style="margin:0px">{{effect.label}}</h1>
+        </header>
+
+        <nav class="sheet-tabs tabs">
+            <a class="item" data-group="primary" data-tab="details">
+                <i class="fas fa-book" data-tab="details"></i>{{localize 'JOHNSCYPHERADDONS.Details'}}
+            </a>
+            <a class="item" data-group="primary" data-tab="duration">
+                <i class="fas fa-clock" data-tab="duration"></i>{{localize 'JOHNSCYPHERADDONS.Duration'}}
+            </a>
+            <a class="item" data-group="primary" data-tab="effects">
+                <i class="fas fa-cogs" data-tab="effects"></i>{{localize 'JOHNSCYPHERADDONS.Effects'}}
+            </a>
+        </nav>
+
+        <section class="sheet-body">
+
+            <div class="tab details form-group {{#if (eq tab 'details')}}active{{/if}}" data-group="primary" data-tab="details">
+
+                <ol class="items-list" style="padding:3px">
+                    
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.EffectIcon' }}</label>
+                        <div class="flexrow">
+                            {{filePicker target="icon" type="image"}}
+                            <input class="image icon" type="text" name="icon" placeholder="path/image.png" value="{{effect.icon}}" />    
+                        </div>
+                    </li>   
+
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.EffectLabel' }}</label>
+                        <input style="margin-left:1.5%" name='label' type="text" class="label" value="{{effect.label}}"/>
+                    </li>
+
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.EffectDisabled' }}</label>
+                        <input type="checkbox" name='disabled' class="enable" {{checked effect.disabled}} />
+                    </li>
+
+                    <!-- TODO: DEPENDS ON DAE. USE SAME FUNCTIONALITY -->
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.Stackable'}}</label>
+                        <select style="margin-left:1.5%" class="stacks" name='stacks' disabled>
+                            {{#select effect.stacks }}
+                                <option value="origin">{{localize 'JOHNSCYPHERADDONS.DontStackByOrigin'}}</option>
+                                <option value="name">{{localize 'JOHNSCYPHERADDONS.DontStackByName'}}</option>
+                                <option value="reapply">{{localize 'JOHNSCYPHERADDONS.StacksReaplies'}}</option>
+                                <option value="increase">{{localize 'JOHNSCYPHERADDONS.StacksIncrease'}}</option>
+                            {{/select}}
+                        </select>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="tab duration form-group {{#if (eq tab 'duration')}}active{{/if}}" data-group="primary" data-tab="duration" >
+                <ol class="items-list" style="padding:3px">
+
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.DurationTurns'}}</label>
+                        <div class="flexrow">
+                        <label for="rounds" style="text-align:left;">{{localize 'JOHNSCYPHERADDONS.Rounds'}}</label>
+                        <input type="number" name="rounds" class="rounds" value="{{effect.rounds}}" />
+                        <label for="turns" style="text-align:left; padding-left:5px">{{localize 'JOHNSCYPHERADDONS.Turns'}}</label>
+                        <input type="number" name="turns" class="turns" value="{{effect.turns}}" />
+                        </div>
+                    </li>
+
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.StartTurns'}}</label>
+                        <div class="flexrow">
+                            <label for="round" style="text-align:left;">{{localize 'JOHNSCYPHERADDONS.Round'}}</label>
+                            <input type="number" name="startRound" class="round" value="{{effect.startRound}}" />
+                            <label for="turn" style="text-align:left; padding-left:5px">{{localize 'JOHNSCYPHERADDONS.Turn'}}</label>
+                            <input type="number" name="startTurn" class="turn" value="{{effect.startTurn}}" />
+                        </div>
+                    </li>
+                    
+                    <!-- TODO: DEPENDS ON DAE. USE SAME FUNCTIONALITY -->
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.MacroRepeat'}}</label>
+                        <select class="macro-repeat" disabled name='macroRepeat' >
+                            {{#select effect.macroRepeat}}
+                                <option value=""></option>
+                                <option value="start">{{localize 'JOHNSCYPHERADDONS.MacroRepeatStart'}}</option>
+                                <option value="end">{{localize 'JOHNSCYPHERADDONS.MacroRepeatEnd'}}</option>
+                            {{/select}}
+                        </select>
+                    </li>          
+                </ol>
+            </div>
+        
+            <div class="tab effects form-group {{#if (eq tab 'effects')}}active{{/if}}" data-group="primary" data-tab="effects">
+                <ol class="items-list" style="padding:3px">
+
+                    <header class="flexrow">
+                        <div class="key" style="padding-right:2px">{{localize 'JOHNSCYPHERADDONS.AttributeKey'}}</div>
+                        
+                        <div class="flexrow">
+                            <div class="mode" style="padding-right:1px;padding-left:1px;min-width:100px">{{localize 'JOHNSCYPHERADDONS.ChangeMode'}}</div>
+                            <div class="value" style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.AttributeValue'}}</div>
+                            <div class="priority" style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.EffectPriority'}}</div>
+                        </div>
+
+                        <div class="item-controls" style="max-width:10px">
+                            <a class="item-control add-effect">
+                                <i class="far fa-plus-square"></i>
+                            </a>
+                        </div>
+                    </header>
+
+                    <hr>
+
+                    <ol class="items-list" style="padding:0px">
+                        {{#each effect.changes as |change id|}}
+                            <div class="form-group">
+                                <li class="flexrow" style="margin-bottom:2px">
+                                    <div style="padding-right:2px">
+                                        <input class="attr-key" type="text" name="changes.{{@index}}.key" value="{{change.key}}" data-index="{{@index}}"/>
+                                        <div class="flexrow">
+                                            <label for="self" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Self' }}</label>
+                                            <input type="checkbox" name="changes.{{@index}}.self" class="self" data-index="{{@index}}" {{ checked change.self }} />
+                                            <label for="target-pc" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.TargetPCs' }}</label>
+                                            <input type="checkbox" name="changes.{{@index}}.targetPCs" class="target-pc" data-index="{{@index}}" {{ checked change.targetPCs }} />
+                                            <label for="target-npc" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.TargetNPCs' }}</label>
+                                            <input type="checkbox" name="changes.{{@index}}.targetNPCs" class="target-npc" data-index="{{@index}}" {{ checked change.targetNPCs }} />
+                                        </div>
+                                    </div>
+
+                                    <div class="flexrow">
+                                        <div style="padding-right:1px;padding-left:1px">
+                                            <select class="change-mode" name="changes.{{@index}}.mode" data-index="{{@index}}" style="min-width:100px;max-width:100px;">
+                                                {{#select change.mode}}
+                                                <option value="0">{{localize 'JOHNSCYPHERADDONS.Custom'}}</option>
+                                                <option value="1">{{localize 'JOHNSCYPHERADDONS.Multiply'}}</option>
+                                                <option value="2">{{localize 'JOHNSCYPHERADDONS.Add'}}</option>
+                                                <option value="3">{{localize 'JOHNSCYPHERADDONS.Downgrade'}}</option>
+                                                <option value="4">{{localize 'JOHNSCYPHERADDONS.Upgrade'}}</option>
+                                                <option value="5">{{localize 'JOHNSCYPHERADDONS.Override'}}</option>
+                                                {{/select}}
+                                            </select>
+                                        </div>
+
+                                        <div style="padding-right:1px;padding-left:1px">
+                                            <input type="number" name="changes.{{@index}}.value" class="attr-value" data-index="{{@index}}" value="{{change.value}}"/>
+                                        </div>
+                                        
+                                        <div style="padding-right:1px;padding-left:1px">
+                                            <input type="number" name="changes.{{@index}}.priority" class="priority" data-index="{{@index}}" value="{{change.priority}}"/>
+                                        </div>
+                                    </div>
+
+                                    <a class="item-controls remove-effect" style="max-width:10px" data-index="{{@index}}"><i class="fas fa-trash" data-index="{{@index}}"></i></a>
+                                </li>
+                            </div>
+                            <hr>
+                        {{/each}}
+                    </ol>  
+                </ol>
+            </div>
+        </section>
+        <footer class="sheet-footer">
+            <button type="submit"><i class="fas fa-save"></i>{{localize 'JOHNSCYPHERADDONS.Save'}}</button>
+        </footer>
+    </div>    
+</form>

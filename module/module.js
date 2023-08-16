@@ -12,7 +12,7 @@ import * as ItemsSheetAddons from "./items/item-sheets.js"
 import * as ActorsAddons from "./actors/actors.js";
 import * as ActorSheetsAddons from "./actors/actors-sheets.js";
 import * as RulerAddons from "./automation/ruler.js"
-
+import * as ActiveEffectsAddons from "./active-effects/custom-active-effect.js"
 let socket;
 
 Hooks.on("sequencer.ready", () => {

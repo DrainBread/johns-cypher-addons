@@ -40,7 +40,7 @@
     "JOHNSCYPHERADDONS.ActiveEffects": "Efeitos Ativos",
     "JOHNSCYPHERADDONS.Details": "Detalhes",
     "JOHNSCYPHERADDONS.Duration": "Duração",
-    "JOHNSCYPHERADDONS.EffectEnable": "Habilitar Efeito",
+    "JOHNSCYPHERADDONS.EffectDisabled": "Desabilitar Efeito",
     "JOHNSCYPHERADDONS.EffectLabel": "Nome do Efeito",
     "JOHNSCYPHERADDONS.EffectIcon": "Ícone do Efeito",
     "JOHNSCYPHERADDONS.ApplyInInventory": "Aplicar Efeito No Inventário",

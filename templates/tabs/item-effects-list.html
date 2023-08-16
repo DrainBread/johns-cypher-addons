@@ -15,7 +15,7 @@
                     <div class="label">
                         <img src="{{effect.icon}}" style="height:20px">
                         {{effect.label}}
-                        ({{effect.sourceName}})
+                        ({{effect.origin}})
                     </div>
                     {{#if effect.transfer}}
                         <i class="fas fa-arrow-down" style="padding-top:4px; width:10%"></i>
@@ -26,11 +26,7 @@
                     {{#if effect.disabled}}
                         <strong style="color:red">{{localize 'JOHNSCYPHERADDONS.Disabled'}}</strong>
                     {{else}}
-                        {{#if effect.isTemporary}}
-                            <div style="flex-grow:3">{{effect.duration.label}}</div>
-                        {{else}}
                             <strong style="color:green">{{localize 'JOHNSCYPHERADDONS.Enabled'}}</strong>
-                        {{/if}}
                     {{/if}}
 
                     <div class="item-controls" style="text-align:right; padding-right:5px">
@@ -40,7 +36,7 @@
                 </li>
                 {{#each effect.changes as |change|}}
                 <li class="flexrow" data-effect-index="{{@../index}}" data-change-index="{{@index}}">
-                    <div class="name">{{change.label}}</div>
+                    <div class="key">{{change.key}}</div>
                     <div class="mode">{{lookup ../../modes @change.mode}}</div>
                     <div class="value">{{change.value}}</div>
                 </li>

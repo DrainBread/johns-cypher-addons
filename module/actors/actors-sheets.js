@@ -36,12 +36,17 @@ export class CustomSheetPC extends CypherActorSheetPC {
             // TODO: apply custom flags (self/PC/NPC, from inventory, macro repeat, stack)
             // TODO: Effect Transfer, like DAE
             // TODO: consider stacking
+
+            //this.actor.createEmbeddedDocuments("ActiveEffect", [DATA]);
+
+            /*
             if(item.flags['johns-cypher-addons'] && item.flags['johns-cypher-addons'].effects){
                 this.item.setFlag('johns-cypher-addons', 'effects', {"enabled": true});
                 const DATA = item.flags['johns-cypher-addons'].effects;
                 if(!DATA.applyFromInventory)
-                    this.actor.createEmbeddedDocuments("ActiveEffect", [DATA]);    
-            }              
+                       
+            }
+            */
         });
     
             /** PAY ITEM */
@@ -49,15 +54,7 @@ export class CustomSheetPC extends CypherActorSheetPC {
             const shownItem = $(clickEvent.currentTarget).parents(".item");
             const item = duplicate(this.actor.items.get(shownItem.data("itemId")));
 
-            // TODO: apply custom flags (self/PC/NPC, from inventory, macro repeat, stack)
-            // TODO: Effect Transfer, like DAE
-            // TODO: consider stacking
-            if(item.flags['johns-cypher-addons'] && item.flags['johns-cypher-addons'].effects){
-                this.item.setFlag('johns-cypher-addons', 'effects', {"enabled": true});
-                const DATA = item.flags['johns-cypher-addons'].effects;
-                if(!DATA.applyFromInventory)
-                    this.actor.createEmbeddedDocuments("ActiveEffect", [DATA]);    
-            }            
+            // TODO: replicate roll        
         });
     
             /** CAST SPELL */
@@ -66,16 +63,7 @@ export class CustomSheetPC extends CypherActorSheetPC {
             const item = duplicate(this.actor.items.get(shownItem.data("itemId")));
     
             let recoveryUsed = useRecoveries(this.actor, true);
-    
-            // TODO: apply custom flags (self/PC/NPC, from inventory, macro repeat, stack)
-            // TODO: Effect Transfer, like DAE
-            // TODO: consider stacking
-            if(item.flags['johns-cypher-addons'] && item.flags['johns-cypher-addons'].effects){
-                this.item.setFlag('johns-cypher-addons', 'effects', {"enabled": true});
-                const DATA = item.flags['johns-cypher-addons'].effects;
-                if(!DATA.applyFromInventory)
-                    this.actor.createEmbeddedDocuments("ActiveEffect", [DATA]);    
-            }   
+            // TODO: replicate roll
         });
     }
 

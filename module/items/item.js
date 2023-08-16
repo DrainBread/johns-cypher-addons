@@ -22,7 +22,7 @@ export async function deleteAttackAmmo(item){
   const id = item.id;
   const actor = game.actors.get(item.actor.id);
 
-  const attacks = Array.from(actor.data.items).filter( i => i.type == 'attack');
+  const attacks = Array.from(actor.items).filter( i => i.type == 'attack');
   for(const attack of attacks){
     if(attack.getFlag('johns-cypher-addons','additionalSettings')){
       let flags = attack.getFlag('johns-cypher-addons','additionalSettings');
@@ -45,7 +45,7 @@ export async function updateArmorActive(armor){
     const actor = game.actors.get(armor.actor.id);
   
     // Get other active light, medium and heavy armors for this actor that are NOT the current one.
-    const activeArmors = Array.from(actor.data.items)
+    const activeArmors = Array.from(actor.items)
       .filter( i => i.type == 'armor' 
       && i.data.data.armorActive 
       && mutuallyExclusiveTypes.includes(i.data.data.armorType)

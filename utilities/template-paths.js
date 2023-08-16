@@ -6,7 +6,7 @@ export async function preloadTemplates() {
     "modules/johns-cypher-addons/templates/tabs/item-tags.html",
     "modules/johns-cypher-addons/templates/tabs/attack-settings.html",
     "modules/johns-cypher-addons/templates/tabs/item-effects-list.html",
-    "modules/johns-cypher-addons/templates/dialog/item-effects.html",
+    "modules/johns-cypher-addons/templates/forms/item-effects.html",
     "modules/johns-cypher-addons/templates/sheets/ammo-sheet.html",
     "modules/johns-cypher-addons/templates/sheets/armor-sheet.html",
     "modules/johns-cypher-addons/templates/sheets/artifact-sheet.html",

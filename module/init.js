@@ -1,6 +1,6 @@
 import * as Utils from "../utilities/utils.js";
 
-export const supportedTypes = ['ammo','armor','artifact','attack','cypher','equipment','material','oddity'];
+export const supportedTypes = ['ability', 'ammo','armor','artifact','attack','cypher','equipment','material','oddity'];
 
 export async function initialize(){
 
@@ -41,7 +41,7 @@ export async function initialize(){
       }
       
       /** ADD OWNED ITEM AFFINITIES AND TAGS*/
-      let items = Array.from(actor.data.items).filter(i => supportedTypes.includes(i.type));
+      let items = Array.from(actor.items).filter(i => supportedTypes.includes(i.type));
       for(const item of items){
         /** ADD ATTACK & ARMOR AFFINITIES */
         if(item.type == 'attack' || item.type == 'armor'){
@@ -58,16 +58,24 @@ export async function initialize(){
         if(!item.type.includes('skill')){
           if(!item.getFlag('johns-cypher-addons', 'effects')){
             item.setFlag('johns-cypher-addons', 'effects', []);
+          }else{
+            let effects = item.getFlag('johns-cypher-addons', 'effects')
+            if(effects && effects.length){
+              effects.forEach(e => e.rendered = false);
+              item.setFlag('johns-cypher-addons', 'effects', effects);
+            }
           }
         }
 
         /** ADD ITEM TAGS */
-        if(item.getFlag('johns-cypher-addons', 'tags')){
-          let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'tags'),  Utils.clone(itemTags));
-          await item.setFlag('johns-cypher-addons', 'tags', {});
-          item.setFlag('johns-cypher-addons', 'tags', flag);
-        } else {
-          item.setFlag('johns-cypher-addons', 'tags', Utils.clone(itemTags));          
+        if(!item.type.includes('ability')){
+          if(item.getFlag('johns-cypher-addons', 'tags')){
+            let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'tags'),  Utils.clone(itemTags));
+            await item.setFlag('johns-cypher-addons', 'tags', {});
+            item.setFlag('johns-cypher-addons', 'tags', flag);
+          } else {
+            item.setFlag('johns-cypher-addons', 'tags', Utils.clone(itemTags));          
+          }
         }
 
       }
@@ -114,17 +122,25 @@ export async function initialize(){
       if(!item.type.includes('skill')){
         if(!item.getFlag('johns-cypher-addons', 'effects')){
           item.setFlag('johns-cypher-addons', 'effects', []);
+        }else{
+          let effects = item.getFlag('johns-cypher-addons', 'effects')
+          if(effects && effects.length){
+            effects.forEach(e => e.rendered = false);
+            item.setFlag('johns-cypher-addons', 'effects', effects);
+          }
         }
       }
       
       /** ADD TAGS */
-      if(item.getFlag('johns-cypher-addons', 'tags')){
-        let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'tags'),  Utils.clone(itemTags));
-        await item.setFlag('johns-cypher-addons', 'tags', {});
-        item.setFlag('johns-cypher-addons', 'tags', flag);
-      } else {
-        item.setFlag('johns-cypher-addons', 'tags', Utils.clone(itemTags));
-      }      
+      if(!item.type.includes('ability')){
+        if(item.getFlag('johns-cypher-addons', 'tags')){
+          let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'tags'),  Utils.clone(itemTags));
+          await item.setFlag('johns-cypher-addons', 'tags', {});
+          item.setFlag('johns-cypher-addons', 'tags', flag);
+        } else {
+          item.setFlag('johns-cypher-addons', 'tags', Utils.clone(itemTags));
+        }
+      }
     }    
 
     ui.notifications.info(game.i18n.localize("JOHNSCYPHERADDONS.InitFinished"));
@@ -139,7 +155,7 @@ export async function reloadTags(){
   /** ADD TAGS TO PLAYER OWNED ITEMS */
   let PCs = Array.from(game.actors).filter(value => value.data.type == 'PC');
   for(const actor of PCs){
-    let items = Array.from(actor.data.items).filter(i => supportedTypes.includes(i.type));
+    let items = Array.from(actor.items).filter(i => supportedTypes.includes(i.type));
     for(const item of items){
       if(item.getFlag('johns-cypher-addons', 'tags')){
         let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'tags'),  Utils.clone(itemTags));
@@ -188,7 +204,7 @@ export async function reloadAffinities(){
     }
 
     /** ADD OWNED ATTACK & ARMOR AFFINITIES */
-    let attacks = Array.from(actor.data.items).filter(i => i.type == 'attack' || i.type == 'armor');
+    let attacks = Array.from(actor.items).filter(i => i.type == 'attack' || i.type == 'armor');
     for(const item of attacks){
       if(item.getFlag('johns-cypher-addons', 'affinities')){
         let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'affinities'),  Utils.clone(affinities));
@@ -214,7 +230,7 @@ export async function reloadAffinities(){
   }
 
   /** ADD NOT-OWNED ATTACK & ARMOR AFFINITIES */
-  let attacks = Array.from(actor.data.items).filter(i => i.type == 'attack' || i.type == 'armor');
+  let attacks = Array.from(actor.items).filter(i => i.type == 'attack' || i.type == 'armor');
   for(const item of attacks){
     if(item.getFlag('johns-cypher-addons', 'affinities')){
       let flag = Utils.mergeObjects(item.getFlag('johns-cypher-addons', 'affinities'),  Utils.clone(affinities));

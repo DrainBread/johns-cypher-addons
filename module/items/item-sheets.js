@@ -1,5 +1,6 @@
 import { CypherItemSheet } from "../../../../systems/cyphersystem/module/item/item-sheet.js";
 import { CustomActiveEffect } from "../active-effects/custom-active-effect.js"
+import { generateId } from "../../utilities/utils.js"
 
 export class CustomSheetItem extends CypherItemSheet {
 
@@ -10,6 +11,16 @@ export class CustomSheetItem extends CypherItemSheet {
         return `${path}/${itemType}-sheet.html`;
     }
 
+    async getData(){
+        const data = super.getData();
+        const allModes = Object.entries(CONST.ACTIVE_EFFECT_MODES)
+        .reduce((obj, e) => {
+            obj[e[1]] = game.i18n.localize("EFFECT.MODE_" + e[0]);
+            return obj;
+        }, {});
+        data.modes = allModes;
+        return data;
+    }
 
     async activateListeners(html) {
         super.activateListeners(html);
@@ -30,40 +41,47 @@ export class CustomSheetItem extends CypherItemSheet {
         });        
 
         /** EFFECTS */
+        html.find('a.add').click(event => {            
+            let effects = this.item.getFlag('johns-cypher-addons', 'effects')
 
-        // WHEN A NEW ONE IS ADDED SET THESE AND SOME OTHER BASIC STUFF!!!!
-        //{ 'stacks': 'notByOrigin', 'enabled': false}
+            const effect = {
+                iid: generateId(),
+                rendered: false,
+                changes: [],
+                disabled: true,
+                duration: {
+                    combat: undefined,
+                    label: '',
+                    rounds: undefined,
+                    turns: undefined,
+                    startRound: undefined,
+                    startTurn: undefined,
+                },
+                icon: this.item.data.img,
+                label: this.item.data.name,
+                origin: this.item.id,
+                transfer: false,
+                stacks: 'origin'
+                
+            };
 
-        html.find('a.add').click(event => {
-            if(this.item.getFlag('johns-cypher-addons', 'effects')){
-                let effects = this.item.getFlag('johns-cypher-addons', 'effects');
-                effects.push(
-                    {
-                        label: this.item.data.name,
-                        icon: this.item.data.img,
-                        sourceName: this.item.data.name,
-                        isTemporary: false,
-                        disabled: true,
-                        duration: {
-                            label: "",
-                            rounds: "",
-                            turns: "",
-                            startRound: "",
-                            startTurn: "",
-
-                        },
-                        changes: []
-                    }
-                );
-                this.item.setFlag('johns-cypher-addons', 'effects', effects)
-            }
+            effects.push(effect);
+            this.item.setFlag('johns-cypher-addons', 'effects', effects);
         });
 
         html.find('a.edit').click(event => {
             const index = event.target.dataset.index;
-            const effect = this.item.getFlag('johns-cypher-addons', 'effects')[index];
-            const itemEffect = new CustomActiveEffect(effect, this.item);
-            return itemEffect.render(true);
+            let effects = this.item.getFlag('johns-cypher-addons', 'effects');
+            
+            if(!effects[index].rendered)
+                effects[index].rendered = true;
+            else
+                return;
+
+            const effect = effects[index];
+            this.item.setFlag('johns-cypher-addons', 'effects', effects);
+
+            return new CustomActiveEffect(effect, this.item).render(true);
         });
 
             /** REMOVE EFFECT*/
@@ -72,8 +90,13 @@ export class CustomSheetItem extends CypherItemSheet {
 
             // DELETE THE EFFECT FROM THE CURRENT ITEM USER/HOLDER
             if(this.item.actor){
-                const label = this.item.getFlag('johns-cypher-addons', 'effects')[index].label;
-                const effectIDs = Array.from(this.item.actor.effects).filter(e => e.data.label == label).map(e => e.id)
+                const iid = this.item.getFlag('johns-cypher-addons', 'effects')[index].iid;
+                const origin = this.item.getFlag('johns-cypher-addons', 'effects')[index].origin;
+
+                const effectIDs = Array.from(this.item.actor.effects)
+                    .filter(e => e.data.iid == iid && e.data.origin == origin)
+                    .map(e => e.id)
+
                 if(effectIDs && effectIDs.length > 0)
                     this.item.actor.deleteEmbeddedDocuments("ActiveEffect", effectIDs);
             }
