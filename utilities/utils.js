@@ -117,3 +117,44 @@ export function mergeMapsArrays(arr1, arr2, properties = ["key", "value"]){
         return arr2;
     }
 }
+
+export function stringToArray(string){
+    let args = [];
+    string.split(';').forEach(e => {
+        if(e.startsWith("{") && e.endsWith("}")){
+            args.push(JSON.parse(e))
+        }else if(e.startsWith("[") && e.endsWith("]")){
+            let arr = e.slice(1,-1).split(",");
+            let obj = []
+            let eArr = []
+            arr.forEach( x => {
+                if(x.endsWith("}")){
+                    obj.push(x);
+                    eArr.push(JSON.parse(obj.join(",")))
+                    obj = [];
+                }else{
+                    if(obj.length > 0)
+                        obj.push(x)
+                    if(x.startsWith("{"))
+                        obj.push(x)
+                    else
+                        if(!isNaN(x))
+                            eArr.push(parseFloat(x)) 
+                        else if(x.toLowerCase() === "true" || x.toLowerCase() === "false")
+                            eArr.push(x.toLowerCase() === "true")
+                        else
+                            eArr.push(x)
+                }
+            });
+            args.push(eArr);
+        }else{
+            if(!isNaN(e))
+                args.push(parseFloat(e)) 
+            else if(e.toLowerCase() === "true" || e.toLowerCase() === "false")
+                args.push(e.toLowerCase() === "true")
+            else
+                args.push(e)
+        }
+    });
+    return args;
+}

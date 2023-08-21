@@ -28,25 +28,41 @@
                         <label>{{localize 'JOHNSCYPHERADDONS.EffectIcon' }}</label>
                         <div class="flexrow">
                             {{filePicker target="icon" type="image"}}
-                            <input class="image icon" type="text" name="icon" placeholder="path/image.png" value="{{effect.icon}}" />    
+                            <input id="icon" class="image icon" type="text" name="icon" placeholder="path/image.png" value="{{effect.icon}}" />    
                         </div>
                     </li>   
 
                     <li class="item flexrow item-settings" style="margin-bottom:3px">
                         <label>{{localize 'JOHNSCYPHERADDONS.EffectLabel' }}</label>
-                        <input style="margin-left:1.5%" name='label' type="text" class="label" value="{{effect.label}}"/>
+                        <input id="label" style="margin-left:1.5%" name='label' type="text" value="{{effect.label}}"/>
                     </li>
 
                     <li class="item flexrow item-settings" style="margin-bottom:3px">
                         <label>{{localize 'JOHNSCYPHERADDONS.EffectDisabled' }}</label>
-                        <input type="checkbox" name='disabled' class="enable" {{checked effect.disabled}} />
+                        <input id="disabled" type="checkbox" name='disabled' {{checked effect.disabled}} />
                     </li>
 
-                    <!-- TODO: DEPENDS ON DAE. USE SAME FUNCTIONALITY -->
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{ localize 'JOHNSCYPHERADDONS.EffectTransfer' }}</label>
+                        <input id="transfer" type="checkbox" name="transfer" {{checked effect.transfer}} {{disabled (not item)}}/>
+                    </li>
+
+                    <li class="item flexrow item-settings" style="margin-bottom:3px">
+                        <label>{{localize 'JOHNSCYPHERADDONS.Target'}}</label>
+                        <select id="target" style="margin-left:1.5%" name='flags.johns-cypher-addons.target'>
+                            {{#select effect.flags.johns-cypher-addons.target }}
+                                <option value="none"></option>
+                                <option value="self">{{localize 'JOHNSCYPHERADDONS.Self'}}</option>
+                                <option value="PC">{{localize 'JOHNSCYPHERADDONS.PCs'}}</option>
+                                <option value="NPC">{{localize 'JOHNSCYPHERADDONS.NPCs'}}</option>
+                            {{/select}}
+                        </select>
+                    </li>
+
                     <li class="item flexrow item-settings" style="margin-bottom:3px">
                         <label>{{localize 'JOHNSCYPHERADDONS.Stackable'}}</label>
-                        <select style="margin-left:1.5%" class="stacks" name='stacks' disabled>
-                            {{#select effect.stacks }}
+                        <select id="stacks" style="margin-left:1.5%" name='stacks'>
+                            {{#select effect.flags.johns-cypher-addons.stacks }}
                                 <option value="origin">{{localize 'JOHNSCYPHERADDONS.DontStackByOrigin'}}</option>
                                 <option value="name">{{localize 'JOHNSCYPHERADDONS.DontStackByName'}}</option>
                                 <option value="reapply">{{localize 'JOHNSCYPHERADDONS.StacksReaplies'}}</option>
@@ -63,10 +79,12 @@
                     <li class="item flexrow item-settings" style="margin-bottom:3px">
                         <label>{{localize 'JOHNSCYPHERADDONS.DurationTurns'}}</label>
                         <div class="flexrow">
-                        <label for="rounds" style="text-align:left;">{{localize 'JOHNSCYPHERADDONS.Rounds'}}</label>
-                        <input type="number" name="rounds" class="rounds" value="{{effect.rounds}}" />
-                        <label for="turns" style="text-align:left; padding-left:5px">{{localize 'JOHNSCYPHERADDONS.Turns'}}</label>
-                        <input type="number" name="turns" class="turns" value="{{effect.turns}}" />
+                        
+                            <label for="rounds" style="text-align:left;">{{localize 'JOHNSCYPHERADDONS.Rounds'}}</label>
+                            <input id="rounds" type="number" name="rounds" value="{{effect.rounds}}" />
+
+                            <label for="turns" style="text-align:left; padding-left:5px">{{localize 'JOHNSCYPHERADDONS.Turns'}}</label>
+                            <input id="turns" type="number" name="turns" value="{{effect.turns}}" />
                         </div>
                     </li>
 
@@ -74,16 +92,16 @@
                         <label>{{localize 'JOHNSCYPHERADDONS.StartTurns'}}</label>
                         <div class="flexrow">
                             <label for="round" style="text-align:left;">{{localize 'JOHNSCYPHERADDONS.Round'}}</label>
-                            <input type="number" name="startRound" class="round" value="{{effect.startRound}}" />
+                            <input id="startRound" type="number" name="startRound" value="{{effect.startRound}}" />
+
                             <label for="turn" style="text-align:left; padding-left:5px">{{localize 'JOHNSCYPHERADDONS.Turn'}}</label>
-                            <input type="number" name="startTurn" class="turn" value="{{effect.startTurn}}" />
+                            <input id="startTurn" type="number" name="startTurn" value="{{effect.startTurn}}" />
                         </div>
                     </li>
                     
-                    <!-- TODO: DEPENDS ON DAE. USE SAME FUNCTIONALITY -->
                     <li class="item flexrow item-settings" style="margin-bottom:3px">
                         <label>{{localize 'JOHNSCYPHERADDONS.MacroRepeat'}}</label>
-                        <select class="macro-repeat" disabled name='macroRepeat' >
+                        <select id="macroRepeats" disabled name='macroRepeats'>
                             {{#select effect.macroRepeat}}
                                 <option value=""></option>
                                 <option value="start">{{localize 'JOHNSCYPHERADDONS.MacroRepeatStart'}}</option>
@@ -101,9 +119,9 @@
                         <div class="key" style="padding-right:2px">{{localize 'JOHNSCYPHERADDONS.AttributeKey'}}</div>
                         
                         <div class="flexrow">
-                            <div class="mode" style="padding-right:1px;padding-left:1px;min-width:100px">{{localize 'JOHNSCYPHERADDONS.ChangeMode'}}</div>
-                            <div class="value" style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.AttributeValue'}}</div>
-                            <div class="priority" style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.EffectPriority'}}</div>
+                            <div style="padding-right:1px;padding-left:1px;min-width:100px">{{localize 'JOHNSCYPHERADDONS.ChangeMode'}}</div>
+                            <div style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.AttributeValue'}}</div>
+                            <div style="padding-right:1px;padding-left:1px">{{localize 'JOHNSCYPHERADDONS.EffectPriority'}}</div>
                         </div>
 
                         <div class="item-controls" style="max-width:10px">
@@ -114,43 +132,35 @@
                     </header>
 
                     <hr>
-
+                    
                     <ol class="items-list" style="padding:0px">
-                        {{#each effect.changes as |change id|}}
+                        {{#each effect.changes as |change id|}}                            
                             <div class="form-group">
                                 <li class="flexrow" style="margin-bottom:2px">
                                     <div style="padding-right:2px">
-                                        <input class="attr-key" type="text" name="changes.{{@index}}.key" value="{{change.key}}" data-index="{{@index}}"/>
-                                        <div class="flexrow">
-                                            <label for="self" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.Self' }}</label>
-                                            <input type="checkbox" name="changes.{{@index}}.self" class="self" data-index="{{@index}}" {{ checked change.self }} />
-                                            <label for="target-pc" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.TargetPCs' }}</label>
-                                            <input type="checkbox" name="changes.{{@index}}.targetPCs" class="target-pc" data-index="{{@index}}" {{ checked change.targetPCs }} />
-                                            <label for="target-npc" style="text-align:right; padding-right:5px">{{localize 'JOHNSCYPHERADDONS.TargetNPCs' }}</label>
-                                            <input type="checkbox" name="changes.{{@index}}.targetNPCs" class="target-npc" data-index="{{@index}}" {{ checked change.targetNPCs }} />
-                                        </div>
+                                        <input id="key" class="key" type="text" name="changes.{{@index}}.key" value="{{change.key}}" data-index="{{@index}}"/>
                                     </div>
 
                                     <div class="flexrow">
                                         <div style="padding-right:1px;padding-left:1px">
-                                            <select class="change-mode" name="changes.{{@index}}.mode" data-index="{{@index}}" style="min-width:100px;max-width:100px;">
+                                            <select id="mode" name="changes.{{@index}}.mode" data-index="{{@index}}" style="min-width:100px;max-width:100px;">
                                                 {{#select change.mode}}
-                                                <option value="0">{{localize 'JOHNSCYPHERADDONS.Custom'}}</option>
-                                                <option value="1">{{localize 'JOHNSCYPHERADDONS.Multiply'}}</option>
-                                                <option value="2">{{localize 'JOHNSCYPHERADDONS.Add'}}</option>
-                                                <option value="3">{{localize 'JOHNSCYPHERADDONS.Downgrade'}}</option>
-                                                <option value="4">{{localize 'JOHNSCYPHERADDONS.Upgrade'}}</option>
-                                                <option value="5">{{localize 'JOHNSCYPHERADDONS.Override'}}</option>
+                                                    <option value="0">{{localize 'JOHNSCYPHERADDONS.Custom'}}</option>
+                                                    <option value="1">{{localize 'JOHNSCYPHERADDONS.Multiply'}}</option>
+                                                    <option value="2">{{localize 'JOHNSCYPHERADDONS.Add'}}</option>
+                                                    <option value="3">{{localize 'JOHNSCYPHERADDONS.Downgrade'}}</option>
+                                                    <option value="4">{{localize 'JOHNSCYPHERADDONS.Upgrade'}}</option>
+                                                    <option value="5">{{localize 'JOHNSCYPHERADDONS.Override'}}</option>
                                                 {{/select}}
                                             </select>
                                         </div>
 
                                         <div style="padding-right:1px;padding-left:1px">
-                                            <input type="number" name="changes.{{@index}}.value" class="attr-value" data-index="{{@index}}" value="{{change.value}}"/>
+                                            <input id="value" type="text" name="changes.{{@index}}.value" data-index="{{@index}}" value="{{change.value}}"/>
                                         </div>
                                         
                                         <div style="padding-right:1px;padding-left:1px">
-                                            <input type="number" name="changes.{{@index}}.priority" class="priority" data-index="{{@index}}" value="{{change.priority}}"/>
+                                            <input id="priority" type="number" name="changes.{{@index}}.priority" data-index="{{@index}}" value="{{change.priority}}"/>
                                         </div>
                                     </div>
 

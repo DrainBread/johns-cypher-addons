@@ -6,6 +6,11 @@ export async function registerHandlebars() {
       return JSON.stringify(obj);
     });
 
+    Handlebars.registerHelper('arrayfrom', function(iterable) {
+      if(!iterable) return null;
+      return Array.from(iterable);
+    });
+
     Handlebars.registerHelper('find', function(iterable, k, v) {
       if(!iterable) return null;
       return (Array.from(iterable)).find( e => e[k] == v);

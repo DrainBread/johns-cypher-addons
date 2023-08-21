@@ -1,20 +1,16 @@
-import { loadDamageTypes, loadTags, supportedTypes } from "../init.js";
+import { applyActiveEffect } from "../active-effects/active-effects.js"
 
 export async function createItem(item){
 
-  if(supportedTypes.includes(item.type) && !item.getFlag('johns-cypher-addons', 'tags')){
-    const itemTags = await loadTags();
-    item.setFlag('johns-cypher-addons', 'tags', itemTags);
-  }
-    
-
-  if((item.type == 'attack' || item.type == 'armor') && !item.getFlag('johns-cypher-addons', 'affinities')){
-    const damageTypes = await loadDamageTypes();
-    item.setFlag('johns-cypher-addons', 'affinities', damageTypes);
+  if(item.actor && item.getFlag('johns-cypher-addons', 'effects')){
+    let toTransfer = item.getFlag('johns-cypher-addons', 'effects').filter( e => e.transfer && !e.disabled )
+    if(!toTransfer || !toTransfer.length || toTransfer.length < 1)
+      applyActiveEffect(item.actor, toTransfer);
   }
 
-  if(!item.type.includes('skill'))
-    item.setFlag('johns-cypher-addons', 'effects', []);
+  if(!item.type.includes('skill') && !item.getFlag('johns-cypher-addons', 'effects')){
+    await item.setFlag('johns-cypher-addons', 'effects', []);
+  }
 
 }
 
@@ -27,7 +23,7 @@ export async function deleteAttackAmmo(item){
     if(attack.getFlag('johns-cypher-addons','additionalSettings')){
       let flags = attack.getFlag('johns-cypher-addons','additionalSettings');
       if(flags && flags.ammoID == id){
-          attack.setFlag('johns-cypher-addons','additionalSettings', {'ammoID': null});
+        await attack.setFlag('johns-cypher-addons','additionalSettings', {'ammoID': null});
       }
     }
   }

@@ -1,25 +1,10 @@
-import { loadConditions, loadDamageTypes } from "../init.js";
-
 export async function createActor(actor){
-
-  let damageTypes = await loadDamageTypes();
-
-  const affinities = Utils.clone(damageTypes).map(e => { 
-    let el = {}; 
-    el[e.key] = null
-    return el;
-  });
-  
-  const conditions = await loadConditions();
 
   let updates = {};
 
   if (actor.type == "PC") {
     updates["data.pools.totalPool"] = { "value": 30, "max": 30 };
   }
-
-  updates["data.affinities.damageTypes"] = affinities;
-  updates["data.affinities.conditions"] = conditions;
 
   await actor.update(updates);
 

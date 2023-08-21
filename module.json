@@ -42,9 +42,9 @@
             "path": "lang/en.json"
         },
         {
-            "lang": "pt_BR",
+            "lang": "pt-BR",
             "name": "Português Brasileiro",
-            "path": "lang/pt_BR.json"
+            "path": "lang/pt-BR.json"
         }
     ],
     "socket": true

@@ -1,9 +1,6 @@
 export async function preloadTemplates() {
   const templatePaths = [
-    "modules/johns-cypher-addons/templates/tabs/actor-affinities.html",
-    "modules/johns-cypher-addons/templates/tabs/attack-affinities.html",
-    "modules/johns-cypher-addons/templates/tabs/armor-affinities.html",
-    "modules/johns-cypher-addons/templates/tabs/item-tags.html",
+    "modules/johns-cypher-addons/templates/tabs/actor-effects-list.html",
     "modules/johns-cypher-addons/templates/tabs/attack-settings.html",
     "modules/johns-cypher-addons/templates/tabs/item-effects-list.html",
     "modules/johns-cypher-addons/templates/forms/item-effects.html",
@@ -17,8 +14,6 @@ export async function preloadTemplates() {
     "modules/johns-cypher-addons/templates/sheets/oddity-sheet.html",
     "modules/johns-cypher-addons/templates/sheets/pc-sheet.html",
     "modules/johns-cypher-addons/templates/sheets/npc-sheet.html",
-    "modules/johns-cypher-addons/templates/navs/affinities.html",
-    "modules/johns-cypher-addons/templates/navs/tags.html",
     "modules/johns-cypher-addons/templates/navs/effects.html",
     "systems/cyphersystem/templates/item/ability-sheet.html",
     "systems/cyphersystem/templates/item/ammo-sheet.html",

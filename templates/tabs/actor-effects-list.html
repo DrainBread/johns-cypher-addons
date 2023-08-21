@@ -10,14 +10,14 @@
                 </div>
             </li>
             <hr>
-            {{#each item.data.flags.johns-cypher-addons.effects as |effect|}}
+            {{#each (arrayfrom actor.effects) as |effect|}}
                 <li class="item flexrow" data-index="{{@index}}">
                     <div class="label" style="min-width:50%">
-                        <img src="{{effect.icon}}" style="height:20px">
-                        {{effect.label}}
-                        ({{effect.origin}})
+                        <img src="{{effect.data.icon}}" style="height:20px">
+                        {{effect.data.label}}
+                        ({{effect.data.origin}})
                         
-                        {{#with effect.flags.johns-cypher-addons.target as |target|}}
+                        {{#with effect.data.flags.johns-cypher-addons.target as |target|}}
                             {{#if (eq target 'self')}}
                                 <i class="fas fa-user-circle" style="min-width:20px;max-width:20px" title="{{localize 'JOHNSCYPHERADDONS.Self'}}"></i>
                             {{/if}}
@@ -34,7 +34,7 @@
                     </div>
                     
                     <div style="min-width:23%;max-width:23%">
-                        {{#if effect.transfer}}
+                        {{#if effect.data.transfer}}
                             <i class="fas fa-arrow-down" style="padding-top:4px; width:10%"></i>
                         {{else}}
                             <i class="fas fa-arrow-right" style="padding-top:4px; width:10%"></i>
@@ -42,7 +42,7 @@
                     </div>
 
                     <div>
-                        {{#if effect.disabled}}
+                        {{#if effect.data.disabled}}
                             <strong style="color:red">{{localize 'JOHNSCYPHERADDONS.Disabled'}}</strong>
                         {{else}}
                             <strong style="color:green">{{localize 'JOHNSCYPHERADDONS.Enabled'}}</strong>
@@ -54,7 +54,7 @@
                         <a id="delete-effect" data-index="{{@index}}" style="{{#unless ../isGM}}visibility:hidden{{/unless}}"><i class="fas fa-trash" data-index="{{@index}}"></i></a>
                     </div>
                 </li>
-                {{#each effect.changes as |change|}}
+                {{#each effect.data.changes as |change|}}
                     <li class="flexrow" data-effect-index="{{@../index}}" data-change-index="{{@index}}">
                         <div class="key" style="min-width:50%">{{change.key}}</div>
                         <div class="mode" style="min-width:23%;max-width:23%">{{lookup ../../modes @change.mode}}</div>

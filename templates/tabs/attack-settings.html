@@ -9,13 +9,13 @@
             <label class="settings-list">
                 {{localize 'JOHNSCYPHERADDONS.Throwing'}}
             </label>
-            <input class="throwing" {{disabled data.isObserver}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleThrowing'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.throwing}}>
+            <input class="throwing" {{#unless isGM}}disabled{{/unless}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleThrowing'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.throwing}}>
         </li>
         <li class="item flexrow item-settings">
             <label class="settings-list">
                 {{localize 'JOHNSCYPHERADDONS.RequiresAmmo'}}
             </label>
-            <input class="requiresAmmo" {{disabled data.isObserver}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleRequiresAmmo'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.requiresAmmo}}>
+            <input class="requiresAmmo" {{#unless isGM}}disabled{{/unless}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleRequiresAmmo'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.requiresAmmo}}>
         </li>
 
         {{#if data.actor}}

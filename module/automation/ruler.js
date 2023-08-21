@@ -94,7 +94,6 @@ export async function createRuler(distance, shape, macro, ...args){
         const gridDistance = canvas.scene.data.gridDistance;
         const radius = (distance/gridDistance)*gridPixels;
         let tokens = game.canvas.tokens.placeables;
-        // TODO: treat each shape and mark all tokens in the area as targets.
         
         switch(shape){
             case 'circle':                

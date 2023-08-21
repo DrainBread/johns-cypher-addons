@@ -12,7 +12,8 @@ import * as ItemsSheetAddons from "./items/item-sheets.js"
 import * as ActorsAddons from "./actors/actors.js";
 import * as ActorSheetsAddons from "./actors/actors-sheets.js";
 import * as RulerAddons from "./automation/ruler.js"
-import * as ActiveEffectsAddons from "./active-effects/custom-active-effect.js"
+import * as ActiveEffectsAddons from "./active-effects/active-effects.js"
+
 let socket;
 
 Hooks.on("sequencer.ready", () => {
@@ -26,9 +27,6 @@ Hooks.once("socketlib.ready", ()=>{
     
     // initialization
     socket.register("initialize", Init.initialize);    
-    socket.register("reloadAffinities", Init.reloadAffinities);
-    socket.register("reloadConditions", Init.reloadConditions);
-    socket.register("reloadTags", Init.reloadTags);    
 
     // Actors
     socket.register("createActor", ActorsAddons.createActor);
@@ -44,18 +42,15 @@ Hooks.once("socketlib.ready", ()=>{
     socket.register("createRuler", RulerAddons.createRuler);
 
     // Active Effects
-    // ...
+    socket.register("deleteTransferredEffect", ActiveEffectsAddons.deleteTransferredEffect);
+    socket.register("applyTransferredEffect", ActiveEffectsAddons.applyTransferredEffect);
 
     // Combat Automation
-    // ...
-
-    // Crafting Menus
     // ...
 
 });
 
 Hooks.once("init", async function() {
-
     // Register Handlebars.
     registerHandlebars();
 
@@ -77,26 +72,10 @@ Hooks.once("ready", async function () {
     /** INITIALIZE */
     if(game.user.isGM)
         await socket.executeAsGM("initialize");
+    
 })
 
 Hooks.on("ready", async function() { 
-
-    /** RELOAD JOURNALS */
-    Hooks.on("updateJournalEntry", async function (document, change, options, userId) {
-        switch(document.name){
-            case 'Affinities':
-                await socket.executeAsGM("reloadAffinities");
-                break;
-            case 'Conditions':
-                await socket.executeAsGM("reloadConditions");
-                break;
-            case 'Tags':
-                await socket.executeAsGM("reloadTags");
-                break;
-            default:
-                break;
-        }            
-    });
 
     /** ACTOR ADDONS */
     Hooks.on("createActor", async function(actor) {
@@ -108,8 +87,8 @@ Hooks.on("ready", async function() {
     });
 
     /** ITEM & ATTACK & ABILITY ADDONS */
-    Hooks.on("createItem", async function (item) {
-        await socket.executeAsGM("createItem", item);
+    Hooks.on("createItem", async function (document) {
+        await socket.executeAsGM("createItem", document);
     });
 
     Hooks.on("updateItem", async function (document, change, options, userId) {
@@ -122,23 +101,24 @@ Hooks.on("ready", async function() {
 
         if(document.actor && document.type == 'armor' && document.data.data.armorValue <= 0)
             await socket.executeAsGM("updateArmorValue", document);
+
+        if(document.actor && document.getFlag('johns-cypher-addons', 'effects') && change.data){
+            if(change.data.archived == true)
+                await socket.executeAsGM("deleteTransferredEffect", document);
+            else if (change.data.archived == false)
+                await socket.executeAsGM("applyTransferredEffect", document);
+        }
+            
             
     })
 
-    Hooks.on("deleteItem", async function(item) {
-        if(document.actor && item.type == 'ammo')
-            await socket.executeAsGM("deleteAttackAmmo", item);
+    Hooks.on("deleteItem", async function(document) {
+        if(document.actor && document.type == 'ammo')
+            await socket.executeAsGM("deleteAttackAmmo", document);
+
+        if(document.actor && document.getFlag('johns-cypher-addons', 'effects'))
+            await socket.executeAsGM("deleteTransferredEffect", document);
     })
-
-    /** CONDITION EFFECTS */
-
-    Hooks.on("createActiveEffect", (effect, options, userId) => {
-        // TODO: apply special effects. Add effects in the same line within () and separated by ,
-    });
-
-    Hooks.on("deleteActiveEffect", (effect, options, userId) => {
-        // TODO: revert / remove active effects
-    });
 
     /** AUTOMATE RULER */
     Hooks.on("createRuler", async function (distance, shape, macro, ...args){

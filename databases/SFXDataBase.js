@@ -11,7 +11,16 @@ export const database = {
             },
             immunity: {},
             weakness: {},
-            victory: {}
+            victory: {},
+            condition: {
+                debuff: ["modules/johns-cypher-addons/library/SFX/condition/debuff.ogg"],
+                hazard: ["modules/johns-cypher-addons/library/SFX/condition/hazard.ogg"],
+                sleep: ["modules/johns-cypher-addons/library/SFX/condition/sleep.ogg"],
+                dizzy: ["modules/johns-cypher-addons/library/SFX/condition/dizzy.ogg"],
+                confused: ["modules/johns-cypher-addons/library/SFX/condition/confused.ogg"],
+                frozen: ["modules/johns-cypher-addons/library/SFX/condition/frozen.ogg"],
+                paralyzed: ["modules/johns-cypher-addons/library/SFX/condition/paralyzed.ogg"]
+            }
         },
         exploration: {
             discovery: {},
