@@ -11,12 +11,17 @@
             </li>
             <hr>
             {{#each item.data.flags.johns-cypher-addons.effects as |effect|}}
-                <li class="item flexrow" data-index="{{@index}}">
+                <li class="item flexrow" data-iid="{{@key}}">
                     <div class="label" style="min-width:50%">
                         <img src="{{effect.icon}}" style="height:20px">
                         {{effect.label}}
-                        ({{effect.origin}})
-                        
+                        ({{effect.origin}})                        
+                    </div>
+                    
+                    <div style="min-width:23%;max-width:23%">
+                        {{#if effect.transfer}}
+                            <i class="fas fa-arrow-down" style="padding-top:4px; width:10%" title="{{localize 'JOHNSCYPHERADDONS.TransferEffect'}}"></i>
+                        {{/if}}
                         {{#with effect.flags.johns-cypher-addons.target as |target|}}
                             {{#if (eq target 'self')}}
                                 <i class="fas fa-user-circle" style="min-width:20px;max-width:20px" title="{{localize 'JOHNSCYPHERADDONS.Self'}}"></i>
@@ -32,14 +37,6 @@
                             {{/if}}
                         {{/with}}
                     </div>
-                    
-                    <div style="min-width:23%;max-width:23%">
-                        {{#if effect.transfer}}
-                            <i class="fas fa-arrow-down" style="padding-top:4px; width:10%"></i>
-                        {{else}}
-                            <i class="fas fa-arrow-right" style="padding-top:4px; width:10%"></i>
-                        {{/if}}
-                    </div>
 
                     <div>
                         {{#if effect.disabled}}
@@ -50,8 +47,8 @@
                     </div>
 
                     <div class="item-controls" style="text-align:right; padding-right:5px">
-                        <a id="edit-effect" data-index="{{@index}}" style="{{#unless ../isGM}}visibility:hidden{{/unless}}"><i class="fas fa-edit" data-index="{{@index}}"></i></a>
-                        <a id="delete-effect" data-index="{{@index}}" style="{{#unless ../isGM}}visibility:hidden{{/unless}}"><i class="fas fa-trash" data-index="{{@index}}"></i></a>
+                        <a id="edit-effect" data-iid="{{@key}}" style="{{#unless ../isGM}}visibility:hidden{{/unless}}"><i class="fas fa-edit" data-iid="{{@key}}"></i></a>
+                        <a id="delete-effect" data-iid="{{@key}}" style="{{#unless ../isGM}}visibility:hidden{{/unless}}"><i class="fas fa-trash" data-iid="{{@key}}"></i></a>
                     </div>
                 </li>
                 {{#each effect.changes as |change|}}

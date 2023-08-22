@@ -30,15 +30,14 @@ export class CustomSheetPC extends CypherActorSheetPC {
         super.activateListeners(html);
 
         /** ROLL & PAY LISTENERS */
+        
             /** ROLL */
-        // TODO: AWAIT ROLL RESULTS - SHOULDN'T BE A CLICK EVENT!
         html.find('.item-roll').click(event => {
             const shownItem = $(event.currentTarget).parents(".item");
             const item = duplicate(this.actor.items.get(shownItem.data("itemId")));
 
-            if(item.flags['johns-cypher-addons'] && item.flags['johns-cypher-addons'].effects){
-                const DATA = item.flags['johns-cypher-addons'].effects.filter(e => !e.disabled);
-                createActiveEffect(DATA, this.actor)
+            if(item.flags['johns-cypher-addons']?.effects){
+                //TODO: WAIT ROLL RESULTS & CALL EFFECTS
             }
         });
 
@@ -47,8 +46,19 @@ export class CustomSheetPC extends CypherActorSheetPC {
             const shownItem = $(event.currentTarget).parents(".item");
             const item = duplicate(this.actor.items.get(shownItem.data("itemId")));
     
-            if(item.flags['johns-cypher-addons'] && item.flags['johns-cypher-addons'].effects){
-                const DATA = item.flags['johns-cypher-addons'].effects.filter(e => !e.disabled);
+            if(item.flags['johns-cypher-addons']?.effects){
+                let effects = item.flags['johns-cypher-addons'].effects;
+                let DATA = [];
+
+                for(let v of Object.values(effects)){
+                    if(!v.disabled) {
+                        let changes = [];
+                        Object.values(v.changes).forEach(e => changes.push(e));
+                        v.changes = changes;
+                        DATA.push(clone(v));
+                        changes = [];
+                    }
+                }
                 createActiveEffect(DATA, this.actor)
             }   
         });
@@ -89,7 +99,6 @@ export class CustomSheetPC extends CypherActorSheetPC {
             let effects = Array.from(this.actor.effects);
 
             if(!effects[index].data.flags['johns-cypher-addons'] || !effects[index].data.flags['johns-cypher-addons'].rendered){
-                console.log('edit clicked')
                 let effect = effects[index];
                 effect.data.flags['johns-cypher-addons'].rendered = true;
                 await this.actor.updateEmbeddedDocuments("ActiveEffect", [clone(effect.data)]);
@@ -171,7 +180,6 @@ export class CustomSheetNPC extends CypherActorSheetNPC {
             let effects = Array.from(this.actor.effects);
 
             if(!effects[index].data.flags['johns-cypher-addons'] || !effects[index].data.flags['johns-cypher-addons'].rendered){
-                console.log('edit clicked')
                 let effect = effects[index];
                 effect.data.flags['johns-cypher-addons'].rendered = true;
                 await this.actor.updateEmbeddedDocuments("ActiveEffect", [clone(effect.data)]);
@@ -185,7 +193,7 @@ export class CustomSheetNPC extends CypherActorSheetNPC {
             let id = Array.from(this.actor.effects)[index].id;
             if(id){
                 await this.actor.deleteEmbeddedDocuments("ActiveEffect", [id]);
-            }                
+            }              
         });
 
     }

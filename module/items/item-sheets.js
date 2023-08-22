@@ -1,6 +1,6 @@
 import { CypherItemSheet } from "../../../../systems/cyphersystem/module/item/item-sheet.js";
 import { CustomActiveEffect } from "../active-effects/custom-active-effect.js"
-import { generateId, clone } from "../../utilities/utils.js"
+import { generateId } from "../../utilities/utils.js"
 
 export class CustomSheetItem extends CypherItemSheet {
 
@@ -28,13 +28,14 @@ export class CustomSheetItem extends CypherItemSheet {
 
         /** EFFECTS */
         html.find('a#add-effect').click(async (event) => {      
-            let effects = clone(this.item.getFlag('johns-cypher-addons', 'effects'))
+            let effects = this.item.getFlag('johns-cypher-addons', 'effects')
             
-            if(!effects.length)
-                effects = [];
+            if(!effects)
+                effects = {};
 
+            let iid = generateId();
             let effect = {
-                changes: [],
+                changes: {},
                 disabled: true,
                 transfer: false,
                 duration: {
@@ -48,7 +49,7 @@ export class CustomSheetItem extends CypherItemSheet {
                 },
                 flags: {
                     'johns-cypher-addons': {
-                        iid: generateId(),
+                        iid: iid,
                         rendered: false,
                         target: 'self'
                     },
@@ -59,47 +60,39 @@ export class CustomSheetItem extends CypherItemSheet {
                 origin: this.item.id,
                 stacks: 'origin'                
             };
-
-            effects.push(effect);
+            effects[iid] = effect;
             await this.item.setFlag('johns-cypher-addons', 'effects', effects);
         });
 
         html.find('a#edit-effect').click(async (event) => {
-            const index = event.target.dataset.index;
-            let effects = clone(this.item.getFlag('johns-cypher-addons', 'effects'));
-            
-            if(!effects[index].flags['johns-cypher-addons'].rendered)
-                effects[index].flags['johns-cypher-addons'].rendered = true;
-            else
-                return;
+            const iid = event.target.dataset.iid;
+            let effects = this.item.getFlag('johns-cypher-addons', 'effects');
+            const effect = effects[iid];
+            if(effect){
+                if(!effect.flags['johns-cypher-addons'].rendered)
+                    effect.flags['johns-cypher-addons'].rendered = true;
+                else
+                    return;
 
-            const effect = effects[index];
-            
-            await this.item.setFlag('johns-cypher-addons', 'effects', effects);
-
-            new CustomActiveEffect(effect, this.item).render(true);
+                effects[iid] = effect;
+                await this.item.setFlag('johns-cypher-addons', 'effects', effects);
+                new CustomActiveEffect(effect, this.item).render(true);
+            }
         });
 
             /** REMOVE EFFECT*/
         html.find('a#delete-effect').click(async(event) => {
-            const index = event.target.dataset.index;
-
-            // DELETE THE EFFECT FROM THE CURRENT ITEM USER/HOLDER
+            const iid = event.target.dataset.iid;
             if(this.item.actor){
-                const iid = this.item.getFlag('johns-cypher-addons', 'effects')[index].flags['johns-cypher-addons'].iid;
-
                 const effectIDs = Array.from(this.item.actor.effects)
                     .filter(e => e.data.flags['johns-cypher-addons'].iid == iid)
                     .map(e => e.id)
 
-                if(effectIDs && effectIDs.length > 0)
+                if(effectIDs?.length > 0)
                     this.item.actor.deleteEmbeddedDocuments("ActiveEffect", effectIDs);
-            }
+            }           
             
-            // REMOVE THE EFFECT FROM THE LIST
-            let effects = clone(this.item.getFlag('johns-cypher-addons', 'effects'));
-            effects.splice(index,1);
-            await this.item.setFlag('johns-cypher-addons', 'effects', effects);
+            await this.item.unsetFlag('johns-cypher-addons', `effects.${iid}`);
         });
 
         /** TOGGLE THROWING ATTACK */

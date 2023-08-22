@@ -34,10 +34,10 @@ export async function initialize(){
         /** ADD DEFAULT VALUES TO EFFECTS OF EXISTING ITEMS */
         if(!item.type.includes('skill')){
           if(!item.getFlag('johns-cypher-addons', 'effects')){
-            await item.setFlag('johns-cypher-addons', 'effects', []);
+            await item.setFlag('johns-cypher-addons', 'effects', {});
           }else{
             let effects = item.getFlag('johns-cypher-addons', 'effects')
-            if(effects && effects.length){
+            if(effects?.length){
               effects.forEach(e => e.flags['johns-cypher-addons'].rendered = false);
               await item.setFlag('johns-cypher-addons', 'effects', effects);
             }
@@ -66,10 +66,10 @@ export async function initialize(){
       /** ADD DEFAULT VALUES TO EFFECTS OF EXISTING ITEMS */
       if(!item.type.includes('skill')){
         if(!item.getFlag('johns-cypher-addons', 'effects')){
-          await ('johns-cypher-addons', 'effects', []);
+          await ('johns-cypher-addons', 'effects', {});
         }else{
           let effects = item.getFlag('johns-cypher-addons', 'effects')
-          if(effects && effects.length){
+          if(effects?.length){
             effects.forEach(e => e.flags['johns-cypher-addons'].rendered = false);
             await item.setFlag('johns-cypher-addons', 'effects', effects);
           }

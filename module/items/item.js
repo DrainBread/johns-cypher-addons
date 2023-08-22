@@ -1,15 +1,25 @@
 import { applyActiveEffect } from "../active-effects/active-effects.js"
+import { clone } from "../../utilities/utils.js"
 
 export async function createItem(item){
 
   if(item.actor && item.getFlag('johns-cypher-addons', 'effects')){
-    let toTransfer = item.getFlag('johns-cypher-addons', 'effects').filter( e => e.transfer && !e.disabled )
-    if(!toTransfer || !toTransfer.length || toTransfer.length < 1)
-      applyActiveEffect(item.actor, toTransfer);
+    let toTransfer = Object.values(clone(item.getFlag('johns-cypher-addons', 'effects')))
+      .filter( v => v.transfer && !v.disabled )
+
+    if(toTransfer?.length > 0){
+      let changes = [];
+      for(let e of toTransfer){
+        Object.values(e.changes).forEach(c => { changes.push(c) });
+        e.changes = changes;
+        await applyActiveEffect(item.actor, clone(e));
+        changes = [];
+      }
+    }      
   }
 
   if(!item.type.includes('skill') && !item.getFlag('johns-cypher-addons', 'effects')){
-    await item.setFlag('johns-cypher-addons', 'effects', []);
+    await item.setFlag('johns-cypher-addons', 'effects', {});
   }
 
 }
@@ -22,7 +32,7 @@ export async function deleteAttackAmmo(item){
   for(const attack of attacks){
     if(attack.getFlag('johns-cypher-addons','additionalSettings')){
       let flags = attack.getFlag('johns-cypher-addons','additionalSettings');
-      if(flags && flags.ammoID == id){
+      if(flags?.ammoID == id){
         await attack.setFlag('johns-cypher-addons','additionalSettings', {'ammoID': null});
       }
     }
@@ -48,7 +58,7 @@ export async function updateArmorActive(armor){
       && i.id != id);
   
     // If another light, medium or heavy armor is currently active, then deactivate this one
-    if(activeArmors && activeArmors.length){
+    if(activeArmors?.length){
       ui.notifications.error(game.i18n.localize("JOHNSCYPHERADDONS.CannotWearMultipleArmors"));
       const item = duplicate(actor.items.get(id));
       item.data.armorActive = false;

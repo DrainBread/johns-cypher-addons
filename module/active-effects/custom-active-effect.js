@@ -40,10 +40,10 @@ export class CustomActiveEffect extends FormApplication{
         const data = super.getData();
         data.effect = this.effect;
         data.tab = this.tab;
+        data.item = this.item;
         return data;
     }
-
-    // TODO: CUB/Conditions
+    // TODO: changes should be an object, not an array.
     async _updateObject(event, formData) {
         formData = expandObject(formData);
         if (!formData.changes)
@@ -57,42 +57,44 @@ export class CustomActiveEffect extends FormApplication{
                 c.value = parseFloat(c.value);
         }
         
-        let effect = mergeObjects(this.effect, formData, true);
-        let effects = this.item ? clone(this.item.getFlag('johns-cypher-addons','effects')) : Array.from(this.actor.effects).map(e => e.data);
-        const index = effects.findIndex(e => e.flags['johns-cypher-addons'].iid == this.effect.flags['johns-cypher-addons'].iid)
+        
+        this.effect = mergeObjects(this.effect, formData, true);
+        const iid = this.effect.flags['johns-cypher-addons'].iid;
 
-        if(index > -1){
-            effects[index] = effect;
-
-            if(this.item){    
-                await this.item.setFlag('johns-cypher-addons','effects', effects);
-            }
-
-            /* the fuck is this supposed to do?
-            if(this.actor){
-                let actorEffects = Array.from(this.actor.effects);
-                if(actorEffects && actorEffects.length){
-                    let actorEffect = mergeObjects(clone(effect), clone(actorEffects[index]), true);
-                    await this.actor.updateEmbeddedDocuments("ActiveEffect", [clone(actorEffect)]);
-                }   
-            }
-            */
+        // Update Item Effect
+        if(this.item){
+            let itemEffects = clone(this.item.getFlag('johns-cypher-addons','effects'));
+            itemEffects[iid] = clone(this.effect);
+            await this.item.unsetFlag('johns-cypher-addons',`effects.${iid}`);
+            await this.item.setFlag('johns-cypher-addons','effects', itemEffects);
         }
-        
-        this.effect = effect;
-        
-        if(this.item && this.actor){
 
-            const iid = this.item.getFlag('johns-cypher-addons', 'effects')[index].flags['johns-cypher-addons'].iid;   
-            const effectIDs = Array.from(this.actor.effects)
-                .filter(e => e.data.flags['johns-cypher-addons'].iid == iid)
-                .map(e => e.id);
-            const wasApplied = effectIDs && effectIDs.length > 0;
+        // Update Actor Effect - may be ongoing effect from owned item
+        if(this.actor){
+            let changes = [];
+            Object.values(this.effect.changes).forEach(e => changes.push(e));
+            
+            let effect = clone(this.effect)
+            effect.changes = changes;
 
-            if((this.effect.disabled || formData.transfer == false) && wasApplied){
-                this.actor.deleteEmbeddedDocuments("ActiveEffect", effectIDs);
-            } else if(this.effect.transfer && !wasApplied){
-                applyActiveEffect(this.actor, this.effect);
+            let actorEffect = Array.from(this.actor.effects).map(e => e.data).find(e => e.flags['johns-cypher-addons']?.iid == iid);
+            if(actorEffect){
+                actorEffect = mergeObjects(clone(effect), clone(actorEffect), true);
+                await this.actor.updateEmbeddedDocuments("ActiveEffect", [actorEffect]);
+            }
+
+            // Process effects upon flag change to non-transfer and vice-versa
+            if(this.item){
+                const effectIDs = Array.from(this.actor.effects)
+                    .filter(e => e.data.flags['johns-cypher-addons']?.iid == iid)
+                    .map(e => e.id);
+                const wasApplied = effectIDs?.length > 0;
+
+                if((this.effect.disabled || formData.transfer == false) && wasApplied){
+                    this.actor.deleteEmbeddedDocuments("ActiveEffect", effectIDs);
+                } else if(this.effect.transfer && !wasApplied){
+                    applyActiveEffect(this.actor, effect);
+                }
             }
         }
 
@@ -101,16 +103,22 @@ export class CustomActiveEffect extends FormApplication{
     }
 
     async close(){
-        let effects = this.item ? clone(this.item.getFlag('johns-cypher-addons','effects')) : Array.from(this.actor.effects).map(e => e.data);
-        const index = effects.findIndex(e => e.flags['johns-cypher-addons'].iid == this.effect.flags['johns-cypher-addons'].iid)
-        effects[index].flags['johns-cypher-addons'].rendered = false;
-        if(this.item)
-            await this.item.setFlag('johns-cypher-addons','effects', effects);
-        else
-            await this.actor.updateEmbeddedDocuments("ActiveEffect", [clone(effects[index])]);
-        
-        super.close();
+        const iid = this.effect.flags['johns-cypher-addons'].iid;
+        if(this.item){
+            let itemEffects = clone(this.item.getFlag('johns-cypher-addons','effects'));
+            itemEffects[iid].flags['johns-cypher-addons'].rendered = false
+            await this.item.setFlag('johns-cypher-addons','effects', itemEffects);
+        } else {
+            let actorEffect = Array.from(this.actor.effects)
+                .map(e => e.data)
+                .find(e => e.flags['johns-cypher-addons']?.iid == iid);
 
+            if(actorEffect){
+                actorEffect.flags['johns-cypher-addons'].rendered = false; 
+                await this.actor.updateEmbeddedDocuments("ActiveEffect", [actorEffect]);
+            }
+        }
+        super.close();
     }
 
     async activateListeners(html){
@@ -127,19 +135,21 @@ export class CustomActiveEffect extends FormApplication{
 
         // Add Changes
         html.find('a.add-effect').click(event => {
-            this.effect.changes.push({
-                    key: "", 
-                    mode: 0, 
-                    value: 0, 
-                    priority: 10, 
-                });
+            let newKey = Object.keys(this.effect.changes).length;
+            this.effect.changes[newKey] = {
+                key: "", 
+                mode: 0, 
+                value: 0, 
+                priority: 10, 
+            };
             this.render(true);
         });
 
         // Remove changes
         html.find('a.remove-effect').click(event => {
             const index = event.target.dataset.index;
-            this.effect.changes.splice(index,1);
+            // TODO: this will likely not work when updating the flags unless we unset it fusrts
+            delete this.effect.changes[index]
             this.render(true);
         });
 

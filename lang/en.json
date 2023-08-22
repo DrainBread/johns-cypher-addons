@@ -73,9 +73,10 @@
     "JOHNSCYPHERADDONS.PCs": "Players",
     "JOHNSCYPHERADDONS.NPCs": "NPCs",
     "JOHNSCYPHERADDONS.Target": "Target",
-    "JOHNSCYPHERADDONS.TargetSelf": "Target Self",
-    "JOHNSCYPHERADDONS.TargetPCs": "Target Player Character",
-    "JOHNSCYPHERADDONS.TargetNPCs": "Target NPCs",
+    "JOHNSCYPHERADDONS.TargetSelf": "Apply on Self on Pay/Roll",
+    "JOHNSCYPHERADDONS.TargetPCs": "Apply on target Player Characters on Pay/Roll",
+    "JOHNSCYPHERADDONS.TargetNPCs": "Apply no target NPCs on Pay/Roll",
+    "JOHNSCYPHERADDONS.TransferEffect": "Apply to Self when this item is carried",
     "JOHNSCYPHERADDONS.Name": "Name",
     "JOHNSCYPHERADDONS.Mode": "Mode",
     "JOHNSCYPHERADDONS.Value": "Value",
@@ -86,5 +87,6 @@
     "JOHNSCYPHERADDONS.ManageActiveEffects": "Manage Active Effects",
     "JOHNSCYPHERADDONS.EffectUpdated": "Effect Updated",
     "JOHNSCYPHERADDONS.CubInactive": "Unable to apply status effect because the dependency 'Combat Utility Belt' is not active."
+    
     
 }

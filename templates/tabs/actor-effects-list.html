@@ -15,8 +15,13 @@
                     <div class="label" style="min-width:50%">
                         <img src="{{effect.data.icon}}" style="height:20px">
                         {{effect.data.label}}
-                        ({{effect.data.origin}})
-                        
+                        ({{effect.data.origin}})                       
+                    </div>
+                    
+                    <div style="min-width:23%;max-width:23%">
+                        {{#if effect.data.transfer}}
+                            <i class="fas fa-arrow-down" style="padding-top:4px; width:10%" title="{{localize 'JOHNSCYPHERADDONS.TransferEffect'}}"></i>
+                        {{/if}}
                         {{#with effect.data.flags.johns-cypher-addons.target as |target|}}
                             {{#if (eq target 'self')}}
                                 <i class="fas fa-user-circle" style="min-width:20px;max-width:20px" title="{{localize 'JOHNSCYPHERADDONS.Self'}}"></i>
@@ -31,14 +36,6 @@
                                 <i class="fas fa-bullseye" style="min-width:20px;max-width:20px" title="{{localize 'JOHNSCYPHERADDONS.TargetNPCs'}}"></i>
                             {{/if}}
                         {{/with}}
-                    </div>
-                    
-                    <div style="min-width:23%;max-width:23%">
-                        {{#if effect.data.transfer}}
-                            <i class="fas fa-arrow-down" style="padding-top:4px; width:10%"></i>
-                        {{else}}
-                            <i class="fas fa-arrow-right" style="padding-top:4px; width:10%"></i>
-                        {{/if}}
                     </div>
 
                     <div>

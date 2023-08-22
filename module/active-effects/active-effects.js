@@ -1,4 +1,4 @@
-import { clone, mergeObjects, stringToArray, timeout } from "../../utilities/utils.js"
+import { clone, stringToArray, timeout } from "../../utilities/utils.js"
 
 export async function deleteTransferredEffect(item){
     if(!item.actor)
@@ -6,15 +6,17 @@ export async function deleteTransferredEffect(item){
     
     const actor = game.actors.get(item.actor.id);
   
-    // Get all effects with the transfer flag
-    let transEffects = item.getFlag('johns-cypher-addons', 'effects').filter( e => e.transfer && !e.disabled);
+    // Get all effects iids with the transfer flag
+    let itemEffects = clone(item.getFlag('johns-cypher-addons', 'effects'));
+    let toTransfer = Object.keys(itemEffects)
+      .filter( k => itemEffects[k].transfer && !itemEffects[k].disabled );
 
     // For each of those effects, get the effect ids on the actor
     let appliedEffects = [];
-    for(const te of transEffects){
+    for(const te of toTransfer){
         appliedEffects = [].concat(appliedEffects, 
             Array.from(actor.effects).filter(e => 
-                e.data.flags['johns-cypher-addons'].iid == te.flags['johns-cypher-addons'].iid)
+                e.data.flags['johns-cypher-addons'].iid == te)
                 .map(e => e.id));
     }
 
@@ -27,11 +29,20 @@ export async function applyTransferredEffect(item){
         return;
   
     // Get all effects with the transfer flag
-    let transEffects = item.getFlag('johns-cypher-addons', 'effects').filter( e => e.transfer && !e.disabled);
-    if(!transEffects || !transEffects.length || transEffects.length < 1)
-        return;
+    let toTransfer = Object.values(clone(item.getFlag('johns-cypher-addons', 'effects')))
+        .filter( v => v.transfer && !v.disabled );
+
     // Apply the effects
-    await applyActiveEffect(item.actor, transEffects)
+    if(toTransfer?.length > 0){
+        let changes = [];
+        for(let e of toTransfer){
+            Object.keys(e.changes).forEach(k => { changes.push(e.changes[k]) });
+            e.changes = changes;
+            applyActiveEffect(item.actor, clone(e));
+            changes = [];
+        }        
+    }
+        
 }
 
 
@@ -69,19 +80,19 @@ export async function applyActiveEffect(actor, effect){
         switch(effect.flags['johns-cypher-addons'].stacks){
             case 'origin': // if actor already has an effect of the same origin, don't apply it again
                 const sameOrigin = Array.from(actor.effects).filter(e => e.data.origin == effect.origin)
-                if(sameOrigin && sameOrigin.length)
+                if(sameOrigin?.length)
                     return;
                 break;
             case 'name': // if actor already has an effect of the same name, don't apply it again
                 const sameName = Array.from(actor.effects).filter(e => e.data.label == effect.label)
-                if(sameName && sameName.length)
+                if(sameName?.length)
                     return;
                 break;
             case 'reapply': // if actor already has this effect, remove it and apply this new instance
                 const ids = Array.from(actor.effects)
                     .filter(e => e.data.flags['johns-cypher-addons'].iid == effect.flags['johns-cypher-addons'].iid)
                     .map(e => e.id)
-                if(ids && ids.length)
+                if(ids?.length)
                     await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
                 break;
             case 'increase': // just add another instance
@@ -138,7 +149,7 @@ async function executeCustomEffects(effect, actor){
                 }
 
             } else {
-                // TODO: apply regular status using core features (which apparently don't exist!)
+                // apply regular status using core features (which apparently don't exist!)
             }
         }
     }
