@@ -1,8 +1,9 @@
 export const database = {
     system: {
-        critical: {
-            failure: {},
-            success: {}
+        roll: {
+            failure: ["modules/johns-cypher-addons/library/SFX/system/roll/failure.ogg"],
+            criticalSuccess: ["modules/johns-cypher-addons/library/SFX/system/roll/criticalSuccess.ogg"],
+            criticalFailure: {}
         },
         combat: {
             turn: {

@@ -44,59 +44,83 @@ export async function applyTransferredEffect(item){
     }
         
 }
+export function getEffectsFromItem(itemData){
+    if(itemData.flags['johns-cypher-addons']?.effects){
+        let effects = itemData.flags['johns-cypher-addons'].effects;
+        let DATA = [];
 
-
-export async function createActiveEffect(DATA, actor){
-    for(const e of DATA){
-                
-        let target = e.flags['johns-cypher-addons'].target;
-
-        if(target == 'none'){
-            applyActiveEffect(null, e);
-        }else if(target == 'self'){
-            applyActiveEffect(actor, e);
-        }else{
-            let targets = Array.from(game.user.targets)
-
-            while(!targets.length){
-                await timeout(1000);
-                targets = Array.from(game.user.targets);
+        for(let v of Object.values(effects)){
+            if(!v.disabled) {
+                let changes = [];
+                Object.values(v.changes).forEach(e => changes.push(e));
+                v.changes = changes;
+                DATA.push(clone(v));
+                changes = [];
             }
-
-            targets = targets.filter(t => t.actor.type == target)
-            targets.forEach(t => {
-                applyActiveEffect(t.actor, e)
-            });
-
         }
-    };
+        return DATA;
+    }
+    return [];
+}
+
+export async function createActiveEffect(DATA, actorID, targetsIDs){
+
+    const actor = game.actors.get(actorID);
+
+    let targets = game.canvas.tokens.placeables.filter(e => targetsIDs.includes(e.id))
+    for(const e of DATA){                
+        let effectTarget = e.flags['johns-cypher-addons'].target;
+
+        switch(effectTarget){
+            case 'none':
+                applyActiveEffect(null, e);
+                break;
+            case 'self':
+                if(actor)
+                    applyActiveEffect(actor, e);
+                break;
+            default:
+                if(targets?.length){
+                    targets = targets.filter(t => t.actor.type == effectTarget)
+                    targets.forEach(t => {
+                        applyActiveEffect(t.actor, e)
+                    });
+                }else{
+                    ui.notifications.error(game.i18n.localize("JOHNSCYPHERADDONS.NoTargets"));
+                }
+                break;
+        }
+    }
 }
 
 export async function applyActiveEffect(actor, effect){
+
     let createdEffect;
 
     // Process stacks
-    if(actor){
+    if(document){
         switch(effect.flags['johns-cypher-addons'].stacks){
-            case 'origin': // if actor already has an effect of the same origin, don't apply it again
+            case 'origin': 
+                // if actor already has an effect of the same origin, don't apply it again
                 const sameOrigin = Array.from(actor.effects).filter(e => e.data.origin == effect.origin)
                 if(sameOrigin?.length)
                     return;
                 break;
-            case 'name': // if actor already has an effect of the same name, don't apply it again
+            case 'name': 
+                // if actor already has an effect of the same name, don't apply it again
                 const sameName = Array.from(actor.effects).filter(e => e.data.label == effect.label)
                 if(sameName?.length)
                     return;
                 break;
-            case 'reapply': // if actor already has this effect, remove it and apply this new instance
+            case 'reapply': 
+                // if actor already has this effect, remove it and apply this new instance
                 const ids = Array.from(actor.effects)
                     .filter(e => e.data.flags['johns-cypher-addons'].iid == effect.flags['johns-cypher-addons'].iid)
-                    .map(e => e.id)
+                    .map(e => e.id);
                 if(ids?.length)
                     await actor.deleteEmbeddedDocuments("ActiveEffect", ids);
                 break;
-            case 'increase': // just add another instance
-                break;
+            case 'increase':
             default:
                 break;
         }
@@ -135,7 +159,7 @@ async function executeCustomEffects(effect, actor){
             
             const macro = change.key.replaceAll("@Macro","").replaceAll("[","").replaceAll("]","")
             const args = await stringToArray(await parseStringTags(change.value, actor?.id, effect?._id, effect?.origin));
-            game.macros.get(macro).execute(args)
+            game.macros.get(macro).execute(args);
 
         }else if (change.key.startsWith("@Status")){
 

@@ -86,7 +86,28 @@
     "JOHNSCYPHERADDONS.Cancel": "Cancel",
     "JOHNSCYPHERADDONS.ManageActiveEffects": "Manage Active Effects",
     "JOHNSCYPHERADDONS.EffectUpdated": "Effect Updated",
-    "JOHNSCYPHERADDONS.CubInactive": "Unable to apply status effect because the dependency 'Combat Utility Belt' is not active."
-    
+    "JOHNSCYPHERADDONS.CubInactive": "Unable to apply status effect because the dependency 'Combat Utility Belt' is not active.",
+    "JOHNSCYPHERADDONS.RollBeatDifficulty": "Beats difficulty",
+    "JOHNSCYPHERADDONS.NoAmmoEquipped": "No Ammo Equipped!",
+    "JOHNSCYPHERADDONS.TargetTooFar": "Target is too far.",
+    "JOHNSCYPHERADDONS.Damage": "Damage:",
+    "JOHNSCYPHERADDONS.NaNDamage": "Damage is Not a Number!",
+    "JOHNSCYPHERADDONS.ActorNotFound": "No Actor to deal damage to!",
+    "JOHNSCYPHERADDONS.NoTargets": "No target was market to receive this effect.",
+    "JOHNSCYPHERADDONS.PiercesArmor": "Pierces Armor",
+    "JOHNSCYPHERADDONS.TogglePiercesArmor": "Toggle Pierces Armor",
+    "JOHNSCYPHERADDONS.NoAmmo": "No ammo left to hit the target with.",
+    "JOHNSCYPHERADDONS.NoWeaponToThrow": "No weapon to throw.",
+    "JOHNSCYPHERADDONS.RollItem": "Roll Or Pay Item.",
+    "JOHNSCYPHERADDONS.ConsumeItemDialogTitle": "Consume Item?",
+    "JOHNSCYPHERADDONS.ConsumeItemDialog": "You are about to use this item. Would you like to also consume 1 unit?",
+    "JOHNSCYPHERADDONS.YesConsume": "Yes, Consume",
+    "JOHNSCYPHERADDONS.NoConsume": "Just Use, Don't Consume",
+    "JOHNSCYPHERADDONS.UsingAnItem": "{name} is using one {itemName}.",
+    "JOHNSCYPHERADDONS.CriticalSuccessDialogTitle": "Critical Success!",
+    "JOHNSCYPHERADDONS.CriticalSuccessDialog": "You rolled {roll} against {targetName}",
+    "JOHNSCYPHERADDONS.ExtraDamage": "Extra Damage",
+    "JOHNSCYPHERADDONS.MinorEffect": "Minor Effect",
+    "JOHNSCYPHERADDONS.MajorEffect": "Major Effect"
     
 }

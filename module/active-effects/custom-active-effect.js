@@ -43,7 +43,7 @@ export class CustomActiveEffect extends FormApplication{
         data.item = this.item;
         return data;
     }
-    // TODO: changes should be an object, not an array.
+
     async _updateObject(event, formData) {
         formData = expandObject(formData);
         if (!formData.changes)
@@ -148,7 +148,6 @@ export class CustomActiveEffect extends FormApplication{
         // Remove changes
         html.find('a.remove-effect').click(event => {
             const index = event.target.dataset.index;
-            // TODO: this will likely not work when updating the flags unless we unset it fusrts
             delete this.effect.changes[index]
             this.render(true);
         });

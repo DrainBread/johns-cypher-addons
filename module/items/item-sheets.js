@@ -95,6 +95,11 @@ export class CustomSheetItem extends CypherItemSheet {
             await this.item.unsetFlag('johns-cypher-addons', `effects.${iid}`);
         });
 
+        /** TOGGLE ARMOR PIERCING */
+        html.find('input.pierces-armor').change(async (event) => {
+            await this.item.setFlag('johns-cypher-addons', 'additionalSettings', {"piercesArmor" : event.target.checked});
+        });
+
         /** TOGGLE THROWING ATTACK */
         html.find('input.throwing').change(async (event) => {
             await this.item.setFlag('johns-cypher-addons', 'additionalSettings', {"throwing": event.target.checked});

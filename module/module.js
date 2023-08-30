@@ -12,6 +12,7 @@ import * as ItemsSheetAddons from "./items/item-sheets.js"
 import * as ActorsAddons from "./actors/actors.js";
 import * as ActorSheetsAddons from "./actors/actors-sheets.js";
 import * as RulerAddons from "./automation/ruler.js"
+import * as AttackAddons from "./automation/attack-roll.js"
 import * as ActiveEffectsAddons from "./active-effects/active-effects.js"
 
 let socket;
@@ -44,10 +45,11 @@ Hooks.once("socketlib.ready", ()=>{
     // Active Effects
     socket.register("deleteTransferredEffect", ActiveEffectsAddons.deleteTransferredEffect);
     socket.register("applyTransferredEffect", ActiveEffectsAddons.applyTransferredEffect);
-
+    socket.register("createCAE", ActiveEffectsAddons.createActiveEffect);
+    
     // Combat Automation
-    // ...
-
+    socket.register("dealDamageToNPC", AttackAddons.dealDamageToNPC);
+    
 });
 
 Hooks.once("init", async function() {
@@ -107,10 +109,8 @@ Hooks.on("ready", async function() {
                 await socket.executeAsGM("deleteTransferredEffect", document);
             else if (change.data.archived == false)
                 await socket.executeAsGM("applyTransferredEffect", document);
-        }
-            
-            
-    })
+        }            
+    });
 
     Hooks.on("deleteItem", async function(document) {
         if(document.actor && document.type == 'ammo')
@@ -118,11 +118,27 @@ Hooks.on("ready", async function() {
 
         if(document.actor && document.getFlag('johns-cypher-addons', 'effects'))
             await socket.executeAsGM("deleteTransferredEffect", document);
-    })
+    });
 
     /** AUTOMATE RULER */
     Hooks.on("createRuler", async function (distance, shape, macro, ...args){
         RulerAddons.createRuler(distance, shape, macro, args);
-    })
+    });
+
+    /** AUTOMATE ACTIVE EFFECT */
+    Hooks.on("createCAE", async function (data, actorID, targets){
+        await socket.executeAsGM("createCAE", data, actorID, targets);
+    });
+
+    /** AUTOMATE PC ATTACK */
+    Hooks.on("renderChatMessage", async function(message, html, data){        
+        if(!data?.message?.roll)
+            return;
+        AttackAddons.attack(data);
+    });
+
+    Hooks.on("damageNPC", async function(actor, damage){
+        await socket.executeAsGM("dealDamageToNPC", actor, damage);
+    });
 
 });

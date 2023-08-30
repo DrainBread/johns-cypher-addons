@@ -7,6 +7,12 @@
         </li>
         <li class="item flexrow item-settings">
             <label class="settings-list">
+                {{localize 'JOHNSCYPHERADDONS.PiercesArmor'}}
+            </label>
+            <input class="pierces-armor" {{#unless isGM}}disabled{{/unless}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.TogglePiercesArmor'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.piercesArmor}}>
+        </li>
+        <li class="item flexrow item-settings">
+            <label class="settings-list">
                 {{localize 'JOHNSCYPHERADDONS.Throwing'}}
             </label>
             <input class="throwing" {{#unless isGM}}disabled{{/unless}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.ToggleThrowing'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.throwing}}>

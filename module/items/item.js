@@ -17,11 +17,6 @@ export async function createItem(item){
       }
     }      
   }
-
-  if(!item.type.includes('skill') && !item.getFlag('johns-cypher-addons', 'effects')){
-    await item.setFlag('johns-cypher-addons', 'effects', {});
-  }
-
 }
 
 export async function deleteAttackAmmo(item){

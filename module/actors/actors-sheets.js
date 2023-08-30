@@ -3,7 +3,7 @@ import {CypherActorSheetPC} from "../../../../systems/cyphersystem/module/actor/
 import {CypherActorSheetNPC} from "../../../../systems/cyphersystem/module/actor/npc-sheet.js";
 import { clone, generateId } from "../../utilities/utils.js"
 import { CustomActiveEffect } from "../active-effects/custom-active-effect.js"
-import { createActiveEffect } from "../active-effects/active-effects.js"
+import { createActiveEffect, getEffectsFromItem } from "../active-effects/active-effects.js"
 
 // Override default sheet with ours
 export class CustomSheetPC extends CypherActorSheetPC {
@@ -26,41 +26,77 @@ export class CustomSheetPC extends CypherActorSheetPC {
         return data;
     }
 
+    async useItem(item){
+
+        let description = "<hr style='margin:3px 0;'><img class='description-image-chat' src='" + item.data.img + "' width='50' height='50'/>" + item.data.data.description;
+        ChatMessage.create({
+            speaker: ChatMessage.getSpeaker({ actor: this.actor }),
+            content: game.i18n.format("JOHNSCYPHERADDONS.UsingAnItem", {
+                name: this.actor.name,
+                itemName: item.name
+            }) + description,
+            flags: { "itemID": item.id }
+        });
+        if(item.data.flags['johns-cypher-addons']?.effects){
+            let DATA = getEffectsFromItem(item.data);
+            let targetsIDs = Array.from(game.user.targets).map(t => t.id);
+            Hooks.call("createCAE", DATA, this.actor.id, targetsIDs);
+        }
+    }
+
     async activateListeners(html) {
         super.activateListeners(html);
-
-        /** ROLL & PAY LISTENERS */
         
-            /** ROLL */
-        html.find('.item-roll').click(event => {
-            const shownItem = $(event.currentTarget).parents(".item");
-            const item = duplicate(this.actor.items.get(shownItem.data("itemId")));
+        /** CONSUME OR USE ITEM*/
+        html.find('.item-consume').click(async (event) => {
+            if(!this.actor.isOwner)
+                return;
 
-            if(item.flags['johns-cypher-addons']?.effects){
-                //TODO: WAIT ROLL RESULTS & CALL EFFECTS
+            const shownItem = $(event.currentTarget).parents(".item");
+            const itemData = duplicate(this.actor.items.get(shownItem.data("itemId")));
+
+            let item = Array.from(this.actor.items).find(i => i.id == itemData._id);
+            if(item?.data?.data?.quantity > 0 && item?.data?.data?.archived == false){
+                let dialog = new Dialog({
+                    title: game.i18n.localize("JOHNSCYPHERADDONS.ConsumeItemDialogTitle"),
+                    content: `<p>${game.i18n.localize("JOHNSCYPHERADDONS.ConsumeItemDialog")}</p>`,
+                    buttons: {
+                        yes: {
+                            label: `${game.i18n.localize("JOHNSCYPHERADDONS.YesConsume")}`,
+                            callback: async () => {
+                                this.useItem(item);
+                                await item.update({'data.quantity': item.data.data.quantity - 1});
+                            }
+                        },
+                        no:{
+                            label: `${game.i18n.localize("JOHNSCYPHERADDONS.NoConsume")}`,
+                            callback: async () => {
+                                this.useItem(item);
+                            }
+                        },
+                        cancel: {
+                            label: `${game.i18n.localize("JOHNSCYPHERADDONS.Cancel")}`,
+                            callback: () => {}
+                        }
+                    },
+                    default: "cancel",
+                    close: () => {}
+                });
+                dialog.render(true);
             }
+
         });
 
-            /** PAY OR SPELL */
-        html.find('.cast-spell, .item-pay').click(event => {
+        /** PAY OR SPELL */
+        html.find('.cast-spell, .item-pay').click(async (event) => {
             const shownItem = $(event.currentTarget).parents(".item");
-            const item = duplicate(this.actor.items.get(shownItem.data("itemId")));
-    
-            if(item.flags['johns-cypher-addons']?.effects){
-                let effects = item.flags['johns-cypher-addons'].effects;
-                let DATA = [];
-
-                for(let v of Object.values(effects)){
-                    if(!v.disabled) {
-                        let changes = [];
-                        Object.values(v.changes).forEach(e => changes.push(e));
-                        v.changes = changes;
-                        DATA.push(clone(v));
-                        changes = [];
-                    }
-                }
-                createActiveEffect(DATA, this.actor)
-            }   
+            const itemData = duplicate(this.actor.items.get(shownItem.data("itemId")));
+            console.log(itemData)
+            if(itemData.flags['johns-cypher-addons']?.effects){
+                let DATA = getEffectsFromItem(itemData);
+                let targetsIDs = Array.from(game.user.targets).map(t => t.id);
+                Hooks.call("createCAE", DATA, this.actor.id, targetsIDs);
+            }
         });
 
         /** EFFECTS */
