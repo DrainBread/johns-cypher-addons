@@ -98,7 +98,7 @@ export async function applyActiveEffect(actor, effect){
     let createdEffect;
 
     // Process stacks
-    if(document){
+    if(actor){
         switch(effect.flags['johns-cypher-addons'].stacks){
             case 'origin': 
                 // if actor already has an effect of the same origin, don't apply it again

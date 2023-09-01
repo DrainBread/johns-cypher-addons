@@ -1,0 +1,31 @@
+<div class="flexrow" id="animationSettings">
+    <ol class="items-list">
+        <li class="item flexrow">
+            <div class="item-name">
+                <i>{{localize 'JOHNSCYPHERADDONS.AnimationSettings'}}</i>
+            </div>
+        </li>
+
+        <li class="item flexrow item-settings">
+            <label class="settings-list">
+                {{localize 'JOHNSCYPHERADDONS.PlayAnimationMacro'}}
+            </label>
+            <input id="playAnimation" {{#unless isGM}}disabled{{/unless}} type="checkbox" title="{{localize 'JOHNSCYPHERADDONS.TogglePlayAnimation'}}" {{checked item.data.flags.johns-cypher-addons.additionalSettings.playAnimation}}>
+        </li>
+
+        {{#if item.data.flags.johns-cypher-addons.additionalSettings.playAnimation}}
+            <li class="item flexrow item-settings">
+                <label class="settings-list">
+                    {{localize 'JOHNSCYPHERADDONS.AnimationMacroID'}}
+                </label>
+                <input id="animationMacroID" {{#unless isGM}}disabled{{/unless}} type="text" value="{{item.data.flags.johns-cypher-addons.additionalSettings.animationMacroID}}">
+            </li>
+            <li class="item flexrow item-settings">
+                <label class="settings-list">
+                    {{localize 'JOHNSCYPHERADDONS.AnimationMacroArguments'}}
+                </label>
+                <input id="animationMacroArgs" {{#unless isGM}}disabled{{/unless}} type="text" value="{{item.data.flags.johns-cypher-addons.additionalSettings.animationMacroArgs}}">
+            </li>
+        {{/if}}
+    </ol>
+</div>

@@ -1,4 +1,4 @@
-import { clone, measureDistance, timeout } from "../../utilities/utils.js";
+import { clone, measureDistance, timeout, stringToArray } from "../../utilities/utils.js";
 import { getEffectsFromItem } from "../active-effects/active-effects.js"
 
 export async function attack(data){   
@@ -111,10 +111,18 @@ export async function attack(data){
                     continue;
                 }
             }
-            targetActorData
+            
+            let animationMacroID;
+            let animationMacroArgs;
+            if(item.getFlag('johns-cypher-addons', 'additionalSettings').playAnimation){
+                animationMacroID = item.getFlag('johns-cypher-addons', 'additionalSettings').animationMacroID;
+                animationMacroArgs = stringToArray(item.getFlag('johns-cypher-addons', 'additionalSettings').animationMacroArgs);
+                animationMacroArgs = [].concat([actor.id, target.id], animationMacroArgs);
+                
+            }
+
             if(targetActorData.data.level > resultDifficulty){
-                // TODO: Get VFX Macro
-                miss(target, null);
+                miss(target, animationMacroID, animationMacroArgs);
                 if(throwing && game.modules.get("item-piles")?.active){
                     let offsetX = Math.random() > .5 ? 1 : -1;
                     let offsetY = Math.random() > .5 ? 1 : -1;
@@ -125,7 +133,8 @@ export async function attack(data){
                         y: target.center.y + (offCenter*signY) + offsetY
                     }
                     let droppedItemData = clone(item.data);
-                    droppedItemData.data.quantity = 1;
+                    if(!isNaN(droppedItemData.data.quantity))
+                        droppedItemData.data.quantity = 1;
                     await ItemPiles.API.createItemPile(dropPosition, {items: [droppedItemData]});
                 }
                 continue;
@@ -133,7 +142,7 @@ export async function attack(data){
 
             let roll = JSON.parse(data.message.roll).total;
             if(roll > 17)
-                crit(roll, actor, target);
+                crit(roll, target);
 
             if(item.data.flags['johns-cypher-addons']?.effects){
                 let DATA = getEffectsFromItem(item.data);
@@ -142,8 +151,10 @@ export async function attack(data){
             
             let armor = pierceArmor ? 0 : targetActorData.data.armor
             let damage = armor > attackDamage ? 0 : attackDamage - armor;
-            
-            // TODO: await animation to finish.
+
+            if(animationMacroID)
+                await game.macros.get(animationMacroID).execute(animationMacroArgs);
+
             Hooks.call("damageNPC", target.id, damage);
         }
     }
@@ -182,7 +193,7 @@ export async function dealDamageToNPC(tokenID, damage){
     }
 }
 
-async function miss(target, vfxMacro){
+async function miss(target, animationMacroID, animationMacroArgs){
     if(game.modules.get("sequencer")?.active){
         new Sequence()
         .effect("jb2a.ui.miss.red")
@@ -190,11 +201,15 @@ async function miss(target, vfxMacro){
         .sound("johns-cypher-sfx.system.roll.failure.0")
             .volume(.25)
         .play();
-        // TODO: play vfx macro with miss flag
+        
+        if(animationMacroID){
+            animationMacroArgs = [].concat(animationMacroArgs, ['missed']);
+            await game.macros.get(animationMacroID).execute(animationMacroArgs);
+        }
     }    
 }
 
-async function crit(roll, actor, target){
+async function crit(roll, target){
     let extraDamage = 0;
     let extraEffect = null;
     switch(roll){

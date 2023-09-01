@@ -114,6 +114,21 @@ export class CustomSheetItem extends CypherItemSheet {
         html.find('#ammo-select').change(async (event) => {
             await this.item.setFlag('johns-cypher-addons','additionalSettings', {"ammoID": event.target.value});
         });
+
+        /** TOGGLE ANIMATION MACRO */
+        html.find('#playAnimation').change(async (event) => {
+            await this.item.setFlag('johns-cypher-addons','additionalSettings', {"playAnimation": event.target.checked});
+        });
+
+        /** CHANGE ANIMATION MACRO ID */
+        html.find('#animationMacroID').change(async (event) => {
+            await this.item.setFlag('johns-cypher-addons','additionalSettings', {"animationMacroID": event.target.value});
+        });
+
+        /** CHANGE ANIMATION MACRO ARGS */
+        html.find('#animationMacroArgs').change(async (event) => {
+            await this.item.setFlag('johns-cypher-addons','additionalSettings', {"animationMacroArgs": event.target.value});
+        });
     }
 
 }

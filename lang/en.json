@@ -108,6 +108,11 @@
     "JOHNSCYPHERADDONS.CriticalSuccessDialog": "You rolled {roll} against {targetName}",
     "JOHNSCYPHERADDONS.ExtraDamage": "Extra Damage",
     "JOHNSCYPHERADDONS.MinorEffect": "Minor Effect",
-    "JOHNSCYPHERADDONS.MajorEffect": "Major Effect"
+    "JOHNSCYPHERADDONS.MajorEffect": "Major Effect",
+    "JOHNSCYPHERADDONS.AnimationSettings": "Animation Settings",
+    "JOHNSCYPHERADDONS.PlayAnimationMacro": "Play Animation Macro On Roll/Pay/Use",
+    "JOHNSCYPHERADDONS.TogglePlayAnimation": "Toggle Play Animation Macro",
+    "JOHNSCYPHERADDONS.AnimationMacroID": "Animation Macro ID",
+    "JOHNSCYPHERADDONS.AnimationMacroArguments": "Animation Macro Arguments"
     
 }

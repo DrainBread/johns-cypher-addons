@@ -1,5 +1,3 @@
-import * as Utils from "../utilities/utils.js";
-
 export const supportedTypes = ['ability', 'ammo','armor','artifact','attack','cypher','equipment','material','oddity'];
 
 export async function initialize(){

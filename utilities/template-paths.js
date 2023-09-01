@@ -1,5 +1,6 @@
 export async function preloadTemplates() {
   const templatePaths = [
+    "modules/johns-cypher-addons/templates/tabs/item-animation-settings.html",
     "modules/johns-cypher-addons/templates/tabs/roll-item.html",
     "modules/johns-cypher-addons/templates/tabs/actor-effects-list.html",
     "modules/johns-cypher-addons/templates/tabs/attack-settings.html",

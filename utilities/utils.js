@@ -119,6 +119,9 @@ export function mergeMapsArrays(arr1, arr2, properties = ["key", "value"]){
 }
 
 export function stringToArray(string){
+    if(!string)
+        return [];
+
     let args = [];
     string.split(';').forEach(e => {
         if(e.startsWith("{") && e.endsWith("}")){

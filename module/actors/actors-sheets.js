@@ -1,9 +1,9 @@
 
 import {CypherActorSheetPC} from "../../../../systems/cyphersystem/module/actor/pc-sheet.js";
 import {CypherActorSheetNPC} from "../../../../systems/cyphersystem/module/actor/npc-sheet.js";
-import { clone, generateId } from "../../utilities/utils.js"
+import { clone, generateId, stringToArray } from "../../utilities/utils.js"
 import { CustomActiveEffect } from "../active-effects/custom-active-effect.js"
-import { createActiveEffect, getEffectsFromItem } from "../active-effects/active-effects.js"
+import { getEffectsFromItem } from "../active-effects/active-effects.js"
 
 // Override default sheet with ours
 export class CustomSheetPC extends CypherActorSheetPC {
@@ -41,6 +41,12 @@ export class CustomSheetPC extends CypherActorSheetPC {
             let DATA = getEffectsFromItem(item.data);
             let targetsIDs = Array.from(game.user.targets).map(t => t.id);
             Hooks.call("createCAE", DATA, this.actor.id, targetsIDs);
+        }
+        if(item.data.flags['johns-cypher-addons']?.additionalSettings?.playAnimation){
+            let macro = item.getFlag("johns-cypher-addons","additionalSettings").animationMacroID;
+            let args = await stringToArray(item.getFlag("johns-cypher-addons","additionalSettings").animationMacroArgs);
+            args = [].concat([this.actor.id], args);
+            await game.macros.get(macro).execute(args);
         }
     }
 
@@ -91,11 +97,16 @@ export class CustomSheetPC extends CypherActorSheetPC {
         html.find('.cast-spell, .item-pay').click(async (event) => {
             const shownItem = $(event.currentTarget).parents(".item");
             const itemData = duplicate(this.actor.items.get(shownItem.data("itemId")));
-            console.log(itemData)
             if(itemData.flags['johns-cypher-addons']?.effects){
                 let DATA = getEffectsFromItem(itemData);
                 let targetsIDs = Array.from(game.user.targets).map(t => t.id);
                 Hooks.call("createCAE", DATA, this.actor.id, targetsIDs);
+            }
+            if(itemData.flags['johns-cypher-addons']?.additionalSettings?.playAnimation){
+                let macro = itemData.flags['johns-cypher-addons'].additionalSettings.animationMacroID;
+                let args = await stringToArray(itemData.flags['johns-cypher-addons'].additionalSettings.animationMacroArgs);
+                args = [].concat([this.actor.id], args);
+                await game.macros.get(macro).execute(args);
             }
         });
 

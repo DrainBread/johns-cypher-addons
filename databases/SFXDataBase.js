@@ -55,103 +55,67 @@ export const database = {
         consumable: {}
     },
     ability: {
-        active: {
-            task: {},
-            esotery: {},
-            spell: {}
+        action: {
+            spend_calamity: ["modules/johns-cypher-addons/library/SFX/ability/action/spend_calamity/spend_calamity.ogg"],
+            charge: ["modules/johns-cypher-addons/library/SFX/ability/action/charge/charge.ogg"],
+            broadcast: {
+                cast: ["modules/johns-cypher-addons/library/SFX/ability/action/broadcast/broadcast_cast.ogg"],
+                break: ["modules/johns-cypher-addons/library/SFX/ability/action/broadcast/broadcast_break.ogg"]
+            }
         },
-        enabler: {}
+        enabler: {
+            absorb_calamity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/absorb_calamity/absorb_calamity.ogg"],
+            duplicity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/duplicity/duplicity.ogg"],
+            frenzy: ["modules/johns-cypher-addons/library/SFX/ability/enabler/frenzy/frenzy.ogg"]
+        }
     },
     weapon: {
         melee: {
             slashing: {
-                light: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
+                impact: {
+                    light: {},
+                    medium: {},
+                    heavy: {}
                 },
-                medium: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                heavy: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                special: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
+                swings: {
+                    light: {},
+                    medium: {},
+                    heavy: {}
                 }
             },
             piercing: {
-                light: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
+                impact: {
+                    light: {},
+                    medium: {},
+                    heavy: {}
                 },
-                medium: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                heavy: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                special: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
+                swings: {
+                    light: {},
+                    medium: {},
+                    heavy: {}
                 }
             },
             bludgeoning: {
-                light: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
+                impact: {
+                    light: {},
+                    medium: {
+                       flesh : [
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_1.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_2.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_3.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_4.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_5.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_6.ogg"
+                                ]
+                    },
+                    heavy: {}
                 },
-                medium: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                heavy: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                special: {
-                    weponName: {
-                        attack: {},
-                        miss: {},
-                        hit: {}
-                    }
+                swings: {
+                    light: {},
+                    medium: {
+                        hydraulic_punch: ["modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/swings/medium/hydraulic_punch/hydraulic_punch.ogg"]
+                    },
+                    heavy: {}
                 }
             }
         },
