@@ -62,7 +62,7 @@ export class CustomSheetPC extends CypherActorSheetPC {
             const itemData = duplicate(this.actor.items.get(shownItem.data("itemId")));
 
             let item = Array.from(this.actor.items).find(i => i.id == itemData._id);
-            if(item?.data?.data?.quantity > 0 && item?.data?.data?.archived == false){
+            if((item?.data?.data?.quantity > 0 || ['cypher','artifact','oddity'].includes(item.type)) && item?.data?.data?.archived == false){
                 let dialog = new Dialog({
                     title: game.i18n.localize("JOHNSCYPHERADDONS.ConsumeItemDialogTitle"),
                     content: `<p>${game.i18n.localize("JOHNSCYPHERADDONS.ConsumeItemDialog")}</p>`,

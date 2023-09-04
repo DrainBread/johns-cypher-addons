@@ -47,12 +47,26 @@ export const database = {
         container: {}
     },
     items: {
-        cypher: {},
-        artifact: {},
-        oddity: {},
-        equipment: {},
-        material: {},
-        consumable: {}
+        acid: ["modules/johns-cypher-addons/library/SFX/item/acid/acid_1.ogg"],
+        electricity: {
+            charge: [
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_1.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_2.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_3.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_4.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_5.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_6.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_7.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_8.ogg"
+            ],
+            cast: [
+                "modules/johns-cypher-addons/library/SFX/item/electricity/cast/electricity_cast_1.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/cast/electricity_cast_2.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/electricity/cast/electricity_cast_3.ogg"
+            ]
+        },
+        flash: ["modules/johns-cypher-addons/library/SFX/item/flash/flash_1.ogg"],
+        cloak: ["modules/johns-cypher-addons/library/SFX/item/cloak/cloak_1.ogg"]
     },
     ability: {
         action: {
@@ -61,54 +75,110 @@ export const database = {
             broadcast: {
                 cast: ["modules/johns-cypher-addons/library/SFX/ability/action/broadcast/broadcast_cast.ogg"],
                 break: ["modules/johns-cypher-addons/library/SFX/ability/action/broadcast/broadcast_break.ogg"]
+            },
+            hedge_magic: ["modules/johns-cypher-addons/library/SFX/ability/action/hedge_magic/hedge_magic.ogg"],
+            critical_reaction: {
+                cast: ["modules/johns-cypher-addons/library/SFX/ability/action/critical_reaction/critical_reaction_cast.ogg"],
+                end: ["modules/johns-cypher-addons/library/SFX/ability/action/critical_reaction/critical_reaction_end.ogg"]
             }
         },
         enabler: {
             absorb_calamity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/absorb_calamity/absorb_calamity.ogg"],
             duplicity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/duplicity/duplicity.ogg"],
-            frenzy: ["modules/johns-cypher-addons/library/SFX/ability/enabler/frenzy/frenzy.ogg"]
+            frenzy: ["modules/johns-cypher-addons/library/SFX/ability/enabler/frenzy/frenzy.ogg"],
+            decompile: ["modules/johns-cypher-addons/library/SFX/ability/enabler/decompile/decompile.ogg"]
         }
     },
     weapon: {
         melee: {
             slashing: {
                 impact: {
-                    light: {},
-                    medium: {},
-                    heavy: {}
+                    armor: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_5.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_6.ogg"
+                        ],
+                    flesh: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_5.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_6.ogg"
+                        ],
                 },
                 swings: {
                     light: {},
-                    medium: {},
+                    medium: {
+                        sword: [
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_1.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_2.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_3.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_4.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_5.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_6.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_7.ogg",
+                                "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_8.ogg"
+                                ]
+                    },
                     heavy: {}
                 }
             },
             piercing: {
                 impact: {
-                    light: {},
-                    medium: {},
-                    heavy: {}
+                    armor: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_5.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_6.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_7.ogg"
+                            ],
+                    flesh: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_5.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_6.ogg"
+                            ]
                 },
                 swings: {
                     light: {},
-                    medium: {},
+                    medium: {
+                        spear: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_5.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_6.ogg"
+                            ]
+                    },
                     heavy: {}
                 }
             },
             bludgeoning: {
                 impact: {
-                    light: {},
-                    medium: {
-                       flesh : [
-                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_1.ogg",
-                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_2.ogg",
-                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_3.ogg",
-                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_4.ogg",
-                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_5.ogg",
-                                "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/medium/flesh/bludgeon_impact_medium_flesh_6.ogg"
-                                ]
-                    },
-                    heavy: {}
+                    armor: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_5.ogg"
+                        ],
+                    flesh: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_5.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_6.ogg"
+                        ]
                 },
                 swings: {
                     light: {},
@@ -120,106 +190,25 @@ export const database = {
             }
         },
         ranged: {
-            bow: {
-                light: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                medium: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                heavy: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                special: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                }
-            },
-            thrown: {
-                light: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                medium: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                heavy: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                special: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                }
-            },
             gun: {
-                light: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                medium: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                heavy: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
-                },
-                special: {
-                    weponName: {
-                        attack: {},
-                        reload: {},
-                        miss: {},
-                        hit: {}
-                    }
+                pistol: {
+                    fire: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/gun/pistol/fire/ranged_gun_pistol_fire_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/gun/pistol/fire/ranged_gun_pistol_fire_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/gun/pistol/fire/ranged_gun_pistol_fire_3.ogg"
+                            ]
+                }
+            },
+            archery: {},
+            energy: {
+                laser: {
+                    fire: 
+                        [
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/laser/fire/ranged_energy_laser_fire_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/laser/fire/ranged_energy_laser_fire_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/laser/fire/ranged_energy_laser_fire_3.ogg"
+                        ],
+                    impact: []
                 }
             }
         }

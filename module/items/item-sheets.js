@@ -110,6 +110,11 @@ export class CustomSheetItem extends CypherItemSheet {
             await this.item.setFlag('johns-cypher-addons', 'additionalSettings', {"requiresAmmo": event.target.checked, "ammoID": null});     
         });
 
+        /** INPUT DROP CHANCE */
+        html.find('input.dropChance').change(async (event) => {
+            await this.item.setFlag('johns-cypher-addons', 'additionalSettings', {"dropChance": event.target.value});
+        });
+
         /** CHANGE EQUIPPED ammo */
         html.find('#ammo-select').change(async (event) => {
             await this.item.setFlag('johns-cypher-addons','additionalSettings', {"ammoID": event.target.value});

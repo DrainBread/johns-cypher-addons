@@ -49,6 +49,8 @@ Hooks.once("socketlib.ready", ()=>{
     
     // Combat Automation
     socket.register("dealDamageToNPC", AttackAddons.dealDamageToNPC);
+    socket.register("missedRangedAttack", AttackAddons.missRangedAttack);
+    socket.register("landedRangedAttack", AttackAddons.landRangedAttack);    
     
 });
 
@@ -122,7 +124,7 @@ Hooks.on("ready", async function() {
 
     /** AUTOMATE RULER */
     Hooks.on("createRuler", async function (distance, shape, macro, ...args){
-        RulerAddons.createRuler(distance, shape, macro, args);
+        RulerAddons.createRuler(parseInt(distance), shape, macro, args);
     });
 
     /** AUTOMATE ACTIVE EFFECT */
@@ -140,5 +142,14 @@ Hooks.on("ready", async function() {
     Hooks.on("damageNPC", async function(actor, damage){
         await socket.executeAsGM("dealDamageToNPC", actor, damage);
     });
+
+    Hooks.on("missedRangedAttack", async function(actorID, itemID, dropPosition, doDelete){
+        await socket.executeAsGM("missedRangedAttack", actorID, itemID, dropPosition, doDelete);
+    });
+
+    Hooks.on("landedRangedAttack", async function(actorID, itemID, targetID, doDelete){
+        await socket.executeAsGM("landedRangedAttack", actorID, itemID, targetID, doDelete);
+    });
+    
 
 });

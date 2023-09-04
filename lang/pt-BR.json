@@ -30,6 +30,7 @@
     "JOHNSCYPHERADDONS.RequiresAmmo": "Requere Munição",
     "JOHNSCYPHERADDONS.ToggleThrowing": "Alternar Arremesso",
     "JOHNSCYPHERADDONS.ToggleRequiresAmmo": "Alternar Requere Munição",
+    "JOHNSCYPHERADDONS.AmmoDropChance": "Chance de recuperar Munição (0-100)",
     "JOHNSCYPHERADDONS.EquippedAmmo": "Munição Equipada",
     "JOHNSCYPHERADDONS.RulerTutorial": "Use Botão Esquerdo do Mouse para Colocar a Régua, Botão Direito para Cancelar e a Roda do Mouse para Girar.",
     "JOHNSCYPHERADDONS.CannotWearMultipleArmors": "Você está vestindo armadura Leve, Média ou Pesada. Por favor, remova-a antes de tentar equipar outra.",

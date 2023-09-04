@@ -8,7 +8,7 @@ export function timeout(ms){
     return new Promise(resolve => setTimeout(resolve,ms));
 }
 export function measureDistance(tokenA, tokenB){
-    return canvas.grid.measureDistance(tokenA, tokenB).toFixed(1);
+    return Math.floor(canvas.grid.measureDistance(tokenA, tokenB).toFixed(1));
 }
 
 export function clone(obj){
@@ -160,4 +160,15 @@ export function stringToArray(string){
         }
     });
     return args;
+}
+
+export function getRandPosAroundToken(x, y, radius, directionX, directionY){
+    let offsetX = Math.random() > .5 ? 1 : -1;
+    let offsetY = Math.random() > .5 ? 1 : -1;
+    offsetX *= canvas.grid.size;
+    offsetY *= canvas.grid.size;
+    return {
+        'x': x + (radius*directionX) + offsetX,
+        'y': y + (radius*directionY) + offsetY
+    }    
 }

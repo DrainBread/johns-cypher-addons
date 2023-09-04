@@ -30,6 +30,7 @@
     "JOHNSCYPHERADDONS.RequiresAmmo": "Requires Ammo",
     "JOHNSCYPHERADDONS.ToggleThrowing": "Toggle Throwing",
     "JOHNSCYPHERADDONS.ToggleRequiresAmmo": "Toggle Requires Ammo",
+    "JOHNSCYPHERADDONS.AmmoDropChance": "Ammo Drop Chance (0-100)",
     "JOHNSCYPHERADDONS.EquippedAmmo": "Equipped Ammo",
     "JOHNSCYPHERADDONS.RulerTutorial": "Use Left Click to Place, Right Click to Cancel and Mouse Wheel to Rotate.",
     "JOHNSCYPHERADDONS.CannotWearMultipleArmors": "You are already wearing Light, Medium or Heavy armor. Please remove it before attempting to wear another.",

@@ -28,6 +28,13 @@
             {{#if item.data.flags.johns-cypher-addons.additionalSettings.requiresAmmo}}
                 <li class="item flexrow item-settings">
                     <label class="settings-list">
+                        {{localize 'JOHNSCYPHERADDONS.AmmoDropChance'}}
+                    </label>
+                    <input class="dropChance" {{#unless isGM}}disabled{{/unless}} type="number" value="{{item.data.flags.johns-cypher-addons.additionalSettings.dropChance}}">
+                </li>
+
+                <li class="item flexrow item-settings">
+                    <label class="settings-list">
                         {{localize 'JOHNSCYPHERADDONS.EquippedAmmo'}}
                     </label>
                     <select class="auto-margin setting-input" id="ammo-select" style="width: 135px">

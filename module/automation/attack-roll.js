@@ -1,4 +1,4 @@
-import { clone, measureDistance, timeout, stringToArray } from "../../utilities/utils.js";
+import { clone, measureDistance, timeout, stringToArray, getRandPosAroundToken } from "../../utilities/utils.js";
 import { getEffectsFromItem } from "../active-effects/active-effects.js"
 
 export async function attack(data){   
@@ -66,22 +66,20 @@ export async function attack(data){
             }
         }
 
-        let targets = Array.from(user.targets);
-        while(!targets.length){
+        let targets = Array.from(user.targets).filter(t => t.actor.type == 'NPC');
+        while(!targets.length || targets.length < 1){
             await timeout(1000);
-            targets = Array.from(user.targets);
+            targets = Array.from(user.targets).filter(t => t.actor.type == 'NPC');;
         }
 
         const source = Array.from(game.canvas.tokens.placeables).find(e => e.data.actorId == actor.id);
-        let gridSize = canvas.grid.size;
-
         for(const target of targets){
 
             let targetActorData = target.actor.data;
             let facingCenter = target.center;
             let signY = Math.sign(source.center.y-facingCenter.y);
             let signX = Math.sign(source.center.x-facingCenter.x);
-            let offCenter = (target.bounds.height/2)-(gridSize/2);
+            let offCenter = (target.bounds.height/2)-(canvas.grid.size/2);
             facingCenter.x += offCenter*signX;
             facingCenter.y += offCenter*signY;
 
@@ -92,26 +90,21 @@ export async function attack(data){
                 continue;
             }
 
+            let ammoItem;
+            let dropChance = item.data.flags['johns-cypher-addons']?.additionalSettings?.dropChance ? item.data.flags['johns-cypher-addons'].additionalSettings.dropChance : -1;
+            let ammoDropped = Math.random()*100 <= dropChance;
             if(requiresAmmo && ammoID){
-                let ammo = Array.from(actor.items).find(i => i.id == ammoID);
-                if(ammo.data.data.quantity > 0){
-                    await ammo.update({'data.quantity': ammo.data.data.quantity-1});
+                ammoItem = Array.from(actor.items).find(i => i.id == ammoID);
+                if(ammoItem.data.data.quantity > 0){
+                    await ammoItem.update({'data.quantity': ammoItem.data.data.quantity-1});
                 } else {
                     ui.notifications.error(game.i18n.localize("JOHNSCYPHERADDONS.NoAmmo"));
-                    await ammo.update({'data.archived': true});
-                    continue;
-                }
-            }
-
-            if(throwing){
-                if(!item.data.data.archived){
-                    await item.update({'data.archived': true});
-                } else {
-                    ui.notifications.error(game.i18n.localize("JOHNSCYPHERADDONS.NoWeaponToThrow"));
+                    await ammoItem.update({'data.archived': true});
                     continue;
                 }
             }
             
+            let threw = throwing && distance > 3;                
             let animationMacroID;
             let animationMacroArgs;
             if(item.getFlag('johns-cypher-addons', 'additionalSettings').playAnimation){
@@ -120,24 +113,20 @@ export async function attack(data){
                 animationMacroArgs = [].concat([actor.id, target.id], animationMacroArgs);
                 
             }
-
+            
             if(targetActorData.data.level > resultDifficulty){
                 miss(target, animationMacroID, animationMacroArgs);
-                if(throwing && game.modules.get("item-piles")?.active){
-                    let offsetX = Math.random() > .5 ? 1 : -1;
-                    let offsetY = Math.random() > .5 ? 1 : -1;
-                    offsetX *= gridSize;
-                    offsetY *= gridSize;
-                    let dropPosition = {
-                        x: target.center.x + (offCenter*signX) + offsetX,
-                        y: target.center.y + (offCenter*signY) + offsetY
+                if(game.modules.get("item-piles")?.active){
+                    if(threw || (ammoItem && ammoDropped)){
+                        let dropPosition = getRandPosAroundToken(target.center.x,target.center.y, offCenter, signX, signY);
+                        Hooks.call("missedRangedAttack", actor.id, item.id, dropPosition, threw);
                     }
-                    let droppedItemData = clone(item.data);
-                    if(!isNaN(droppedItemData.data.quantity))
-                        droppedItemData.data.quantity = 1;
-                    await ItemPiles.API.createItemPile(dropPosition, {items: [droppedItemData]});
                 }
                 continue;
+            }
+
+            if(threw || (ammoItem && ammoDropped)){
+                Hooks.call("landedRangedAttack", actor.id, item.id, target.id, threw);
             }
 
             let roll = JSON.parse(data.message.roll).total;
@@ -149,7 +138,7 @@ export async function attack(data){
                 Hooks.call("createCAE", DATA, actor.id, [target.id]);
             } 
             
-            let armor = pierceArmor ? 0 : targetActorData.data.armor
+            let armor = pierceArmor ? 0 : targetActorData.data.armor;
             let damage = armor > attackDamage ? 0 : attackDamage - armor;
 
             if(animationMacroID)
@@ -158,6 +147,37 @@ export async function attack(data){
             Hooks.call("damageNPC", target.id, damage);
         }
     }
+}
+
+export async function missRangedAttack(actorID, itemID, dropPosition, doDelete){
+    if(!dropPosition || !actorID || !itemID)
+        return;
+
+    let actor =  game.actors.get(actorID);
+    let droppedItemData = clone(actor.items.find(i => i.id == itemID).data);
+
+    droppedItemData.data['quantity'] = 1;
+    await ItemPiles.API.createItemPile({x: dropPosition.x, y: dropPosition.y}, {items: [droppedItemData]});
+    if(doDelete)
+        await actor.deleteEmbeddedDocuments('Item', [itemID]);
+}
+
+export async function landRangedAttack(actorID, itemID, targetID, doDelete){
+    if(!actorID || !itemID || !targetID)
+        return;
+
+    let actor =  game.actors.get(actorID);
+    let struckItemData = actor.items.find(i => i.id == itemID).data;
+    struckItemData.data.quantity = 1;
+    
+    let target = game.canvas.tokens.placeables.find(t => t.id == targetID);
+    if(!target)
+        return;
+
+    await target.actor.createEmbeddedDocuments('Item', [struckItemData]);
+
+    if(doDelete)
+        await actor.deleteEmbeddedDocuments('Item', [itemID]);
 }
 
 export async function dealDamageToNPC(tokenID, damage){
@@ -169,7 +189,8 @@ export async function dealDamageToNPC(tokenID, damage){
 
     const token = game.canvas.tokens.get(tokenID);
 
-    if(token){
+    if(token && token.actor.type == 'NPC'){
+        // is this really necessary?
         if(!token.data.actorLink){
             let data = token.data.actorData.data;
             let health = null;
