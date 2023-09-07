@@ -1,15 +1,11 @@
 import { clone, measureDistance, timeout, stringToArray, getRandPosAroundToken } from "../../utilities/utils.js";
 import { getEffectsFromItem } from "../active-effects/active-effects.js"
 
-export async function attack(data){   
-    const user = game.users.get(data.user.id);
-    if(game.user.id != user.id)
-        return;
-
+export async function attack(data, user){
     const actor = game.actors.get(data.message.speaker.actor);
     const item = Array.from(actor.data.items).find(a => a.id == data.message.flags.itemID);
 
-    if(!item)
+    if(!item || item.type != 'attack')
         return;
     
     let flavor = data.message.flavor;

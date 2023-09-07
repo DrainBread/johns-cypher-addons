@@ -114,6 +114,12 @@
     "JOHNSCYPHERADDONS.PlayAnimationMacro": "Play Animation Macro On Roll/Pay/Use",
     "JOHNSCYPHERADDONS.TogglePlayAnimation": "Toggle Play Animation Macro",
     "JOHNSCYPHERADDONS.AnimationMacroID": "Animation Macro ID",
-    "JOHNSCYPHERADDONS.AnimationMacroArguments": "Animation Macro Arguments"
+    "JOHNSCYPHERADDONS.AnimationMacroArguments": "Animation Macro Arguments",
+    "JOHNSCYPHERADDONS.Defense": "defense.",
+    "JOHNSCYPHERADDONS.NoAttackQueued": "No NPC attack ready.",
+    "JOHNSCYPHERADDONS.MustBeGM": "Must be GM to perform this action.",
+    "JOHNSCYPHERADDONS.NoAttackerIDForAvoidable": "No attacker ID for avoidable attack.",
+    "JOHNSCYPHERADDONS.NoTarget": "No target to attack."
+
     
 }

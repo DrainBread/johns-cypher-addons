@@ -48,6 +48,7 @@ export const database = {
     },
     items: {
         acid: ["modules/johns-cypher-addons/library/SFX/item/acid/acid_1.ogg"],
+        cloak: ["modules/johns-cypher-addons/library/SFX/item/cloak/cloak_1.ogg"],
         electricity: {
             charge: [
                 "modules/johns-cypher-addons/library/SFX/item/electricity/charge/electricity_charge_1.ogg",
@@ -66,7 +67,12 @@ export const database = {
             ]
         },
         flash: ["modules/johns-cypher-addons/library/SFX/item/flash/flash_1.ogg"],
-        cloak: ["modules/johns-cypher-addons/library/SFX/item/cloak/cloak_1.ogg"]
+        glass: [
+                "modules/johns-cypher-addons/library/SFX/item/glass/glass_shatter_1.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/glass/glass_shatter_2.ogg",
+                "modules/johns-cypher-addons/library/SFX/item/glass/glass_shatter_3.ogg"
+                ]
+        
     },
     ability: {
         action: {
@@ -80,7 +86,37 @@ export const database = {
             critical_reaction: {
                 cast: ["modules/johns-cypher-addons/library/SFX/ability/action/critical_reaction/critical_reaction_cast.ogg"],
                 end: ["modules/johns-cypher-addons/library/SFX/ability/action/critical_reaction/critical_reaction_end.ogg"]
-            }
+            },
+            throw: ["modules/johns-cypher-addons/library/SFX/ability/action/throw/throw.ogg"],
+            warcry: ["modules/johns-cypher-addons/library/SFX/ability/action/war_cry/war_cry.ogg"],
+            mantra: [
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_jaho.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_kra.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_lohk.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_netra.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_ris.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_vaas.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_vom.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_zata.ogg"
+                    ],
+            heal: ["modules/johns-cypher-addons/library/SFX/ability/action/heal/heal.ogg"],
+            enervate: [
+                    "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_1.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_2.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_3.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_4.ogg"
+                    ],
+            blood_wine: [
+                    "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_1.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_2.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_3.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_4.ogg"
+                    ],
+            enrich_gem: ["modules/johns-cypher-addons/library/SFX/ability/action/enrich_gem/enrich_gem.ogg"],
+            fire_and_ice: [
+                        "modules/johns-cypher-addons/library/SFX/ability/action/fire_and_ice/ice.ogg",
+                        "modules/johns-cypher-addons/library/SFX/ability/action/fire_and_ice/fire.ogg"
+                    ]
         },
         enabler: {
             absorb_calamity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/absorb_calamity/absorb_calamity.ogg"],
@@ -91,6 +127,14 @@ export const database = {
     },
     weapon: {
         melee: {
+            special: {
+                spores: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_4.ogg"
+                        ]
+            },
             slashing: {
                 impact: {
                     armor: [
@@ -111,7 +155,9 @@ export const database = {
                         ],
                 },
                 swings: {
-                    light: {},
+                    light: {
+                        
+                    },
                     medium: {
                         sword: [
                                 "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_1.ogg",
@@ -148,7 +194,25 @@ export const database = {
                             ]
                 },
                 swings: {
-                    light: {},
+                    light: {
+                        dagger: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/dagger/piercing_swing_light_dagger_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/dagger/piercing_swing_light_dagger_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/dagger/piercing_swing_light_dagger_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/dagger/piercing_swing_light_dagger_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/dagger/piercing_swing_light_dagger_5.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/dagger/piercing_swing_light_dagger_6.ogg"
+                            
+                        ],
+                        crush_grip: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/crush_grip/piercing_swing_light_crushgrip_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/crush_grip/piercing_swing_light_crushgrip_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/crush_grip/piercing_swing_light_crushgrip_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/crush_grip/piercing_swing_light_crushgrip_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/crush_grip/piercing_swing_light_crushgrip_5.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/light/crush_grip/piercing_swing_light_crushgrip_6.ogg"
+                        ]
+                    },
                     medium: {
                         spear: [
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_1.ogg",
@@ -199,7 +263,59 @@ export const database = {
                             ]
                 }
             },
-            archery: {},
+            archery: {
+                bow: {
+                    draw: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/draw/archery_bow_draw_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/draw/archery_bow_draw_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/draw/archery_bow_draw_3.ogg"
+                    ],
+                    fire: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/fire/archery_bow_fire_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/fire/archery_bow_fire_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/fire/archery_bow_fire_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/fire/archery_bow_fire_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/fire/archery_bow_fire_5.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/fire/archery_bow_fire_6.ogg"
+                    ],
+                    impact: {
+                        armor: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/armor/archery_bow_impact_armor_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/armor/archery_bow_impact_armor_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/armor/archery_bow_impact_armor_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/armor/archery_bow_impact_armor_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/armor/archery_bow_impact_armor_5.ogg"
+                        ],
+                        flesh: [
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/flesh/archery_bow_impact_flesh_1.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/flesh/archery_bow_impact_flesh_2.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/flesh/archery_bow_impact_flesh_3.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/flesh/archery_bow_impact_flesh_4.ogg",
+                            "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/impact/flesh/archery_bow_impact_flesh_5.ogg"
+                        ]
+                    },
+                    miss: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/miss/archery_bow_miss_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/miss/archery_bow_miss_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/miss/archery_bow_miss_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/miss/archery_bow_miss_4.ogg"
+                    ],
+                    whizzby: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/whizzby/archery_bow_whizzby_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/whizzby/archery_bow_whizzby_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/whizzby/archery_bow_whizzby_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/whizzby/archery_bow_whizzby_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/bow/whizzby/archery_bow_whizzby_5.ogg"
+                    ]
+                },
+                crossbow: {
+                    fire: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/crossbow/fire/archery_crossbow_fire_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/crossbow/fire/archery_crossbow_fire_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/archery/crossbow/fire/archery_crossbow_fire_3.ogg"
+                    ]
+                }
+            },
             energy: {
                 laser: {
                     fire: 
