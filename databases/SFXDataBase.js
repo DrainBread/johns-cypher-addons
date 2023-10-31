@@ -33,7 +33,99 @@ export const database = {
     },
     voice: {
         pc: {},
-        npc: {}
+        npc: {
+            sentry: {
+                cry: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/cry/sentry_cry_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/cry/sentry_cry_2.ogg"
+                ],
+                death: ["modules/johns-cypher-addons/library/SFX/voice/npc/sentry/death/sentry_death.ogg"],
+                intrusion: ["modules/johns-cypher-addons/library/SFX/voice/npc/sentry/intrusion/sentry_intrusion.ogg"],
+                intrusion_laser: ["modules/johns-cypher-addons/library/SFX/voice/npc/sentry/intrusion_laser/sentry_intrusion_laser.ogg"],
+                laser_burst: ["modules/johns-cypher-addons/library/SFX/voice/npc/sentry/laser_burst/sentry_laser_burst.ogg"],
+                walk: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/walk/sentry_walk_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/walk/sentry_walk_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/walk/sentry_walk_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/walk/sentry_walk_4.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/walk/sentry_walk_5.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/sentry/walk/sentry_walk_6.ogg"
+                ]
+            },
+            desert_kite: {
+                spear: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/desert_kite/spear/desert_kite_spear_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/desert_kite/spear/desert_kite_spear_2.ogg"
+                ],
+                sting: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/desert_kite/sting/desert_kite_sting_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/desert_kite/sting/desert_kite_sting_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/desert_kite/sting/desert_kite_sting_3.ogg"
+                ]
+            },
+            komoger: {
+                cry: [
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/komoger/cry/komoger_cry_1.ogg",
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/komoger/cry/komoger_cry_2.ogg"
+                ],
+                death: ["modules/johns-cypher-addons/library/SFX/voice/npc/komoger/death/komoger_death.ogg"],
+                infectious_bite: ["modules/johns-cypher-addons/library/SFX/voice/npc/komoger/infectious_bite/komoger_infectious_bite.ogg"],
+                tail: ["modules/johns-cypher-addons/library/SFX/voice/npc/komoger/tail/komoger_tail.ogg"],
+                claw: {
+                    cast: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/komoger/claw/cast/komoger_claw_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/komoger/claw/cast/komoger_claw_2.ogg"
+                    ],
+                    hit: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/komoger/claw/hit/komoger_claw_hit_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/komoger/claw/hit/komoger_claw_hit_2.ogg"
+                    ]
+                }
+            },
+            phalanoceros: {
+                cry: ["modules/johns-cypher-addons/library/SFX/voice/npc/phalanoceros/cry/phalanocero_cry.ogg"],
+                repulsive_horn: ["modules/johns-cypher-addons/library/SFX/voice/npc/phalanoceros/repulsive_horn/phalanocero_repulsive_horn.ogg"]
+            },
+            pankavora: {
+                tail_slap: [
+                            "modules/johns-cypher-addons/library/SFX/voice/npc/pankavora/tail_slap/pankavora_tail_slap.ogg"
+                            ],
+                scale_shot: {
+                    cast: ["modules/johns-cypher-addons/library/SFX/voice/npc/pankavora/scale_shot/cast/pankavora_scale_shot_cast.ogg"],
+                    hit: [
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/pankavora/scale_shot/hit/pankavora_scale_shot_hit_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/pankavora/scale_shot/hit/pankavora_scale_shot_hit_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/pankavora/scale_shot/hit/pankavora_scale_shot_hit_3.ogg",
+                        "modules/johns-cypher-addons/library/SFX/voice/npc/pankavora/scale_shot/hit/pankavora_scale_shot_hit_4.ogg"
+                    ]
+                }
+            },
+            dontalodon: {
+                entangle: ["modules/johns-cypher-addons/library/SFX/voice/npc/dontalodon/entangle/entangle.ogg"],
+                stomp: {
+                    cast: ["modules/johns-cypher-addons/library/SFX/voice/npc/dontalodon/stomp/cast/stomp_cast.ogg"],
+                    hit: ["modules/johns-cypher-addons/library/SFX/voice/npc/dontalodon/stomp/hit/stomp_hit.ogg"]
+                },
+                gore: ["modules/johns-cypher-addons/library/SFX/voice/npc/dontalodon/gore/gore.ogg"]
+            },
+            thar: {
+                cry: [
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/thar/cry/thar_cry_1.ogg",
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/thar/cry/thar_cry_2.ogg",
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/thar/cry/thar_cry_3.ogg",
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/thar/cry/thar_cry_4.ogg",
+                    "modules/johns-cypher-addons/library/SFX/voice/npc/thar/cry/thar_cry_5.ogg"
+                ],
+                death: ["modules/johns-cypher-addons/library/SFX/voice/npc/thar/death/thar_death.ogg"],
+                tackle: {
+                    cast: ["modules/johns-cypher-addons/library/SFX/voice/npc/thar/tackle/cast/thar_tackle_cast.ogg"],
+                    hit: ["modules/johns-cypher-addons/library/SFX/voice/npc/thar/tackle/cast/thar_tackle_hit.ogg"]
+                }
+            },
+            nanospectre: {
+                detonate: ["modules/johns-cypher-addons/library/SFX/voice/npc/nanospectre/detonate/detonate.ogg"]
+            }
+        }
     },
     ambient: {
         environment: {},
@@ -71,13 +163,15 @@ export const database = {
                 "modules/johns-cypher-addons/library/SFX/item/glass/glass_shatter_1.ogg",
                 "modules/johns-cypher-addons/library/SFX/item/glass/glass_shatter_2.ogg",
                 "modules/johns-cypher-addons/library/SFX/item/glass/glass_shatter_3.ogg"
-                ]
+        ]
         
     },
     ability: {
         action: {
             spend_calamity: ["modules/johns-cypher-addons/library/SFX/ability/action/spend_calamity/spend_calamity.ogg"],
+            spawn: ["modules/johns-cypher-addons/library/SFX/ability/action/spawn/spawn.ogg"],
             charge: ["modules/johns-cypher-addons/library/SFX/ability/action/charge/charge.ogg"],
+            discharge: ["modules/johns-cypher-addons/library/SFX/ability/action/discharge/discharge.ogg"],
             broadcast: {
                 cast: ["modules/johns-cypher-addons/library/SFX/ability/action/broadcast/broadcast_cast.ogg"],
                 break: ["modules/johns-cypher-addons/library/SFX/ability/action/broadcast/broadcast_break.ogg"]
@@ -98,31 +192,40 @@ export const database = {
                         "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_vaas.ogg",
                         "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_vom.ogg",
                         "modules/johns-cypher-addons/library/SFX/ability/action/mantra/mantra_zata.ogg"
-                    ],
+            ],
             heal: ["modules/johns-cypher-addons/library/SFX/ability/action/heal/heal.ogg"],
             enervate: [
                     "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_1.ogg",
                     "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_2.ogg",
                     "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_3.ogg",
                     "modules/johns-cypher-addons/library/SFX/ability/action/enervate/enervate_4.ogg"
-                    ],
+            ],
             blood_wine: [
                     "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_1.ogg",
                     "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_2.ogg",
                     "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_3.ogg",
                     "modules/johns-cypher-addons/library/SFX/ability/action/blood_wine/blood_wine_4.ogg"
-                    ],
+            ],
             enrich_gem: ["modules/johns-cypher-addons/library/SFX/ability/action/enrich_gem/enrich_gem.ogg"],
             fire_and_ice: [
                         "modules/johns-cypher-addons/library/SFX/ability/action/fire_and_ice/ice.ogg",
                         "modules/johns-cypher-addons/library/SFX/ability/action/fire_and_ice/fire.ogg"
-                    ]
+            ],
+            stasis: [
+                    "modules/johns-cypher-addons/library/SFX/ability/action/stasis/stasis_cast.ogg",
+                    "modules/johns-cypher-addons/library/SFX/ability/action/stasis/stasis_hit.ogg"
+                    ],
+            tear: ["modules/johns-cypher-addons/library/SFX/ability/action/tear/tear.ogg"],
+            headbite: ["modules/johns-cypher-addons/library/SFX/ability/action/headbite/headbite.ogg"],
+            tail_stinger: ["modules/johns-cypher-addons/library/SFX/ability/action/tail_stinger/tail_stinger.ogg"]
+
         },
         enabler: {
             absorb_calamity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/absorb_calamity/absorb_calamity.ogg"],
             duplicity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/duplicity/duplicity.ogg"],
             frenzy: ["modules/johns-cypher-addons/library/SFX/ability/enabler/frenzy/frenzy.ogg"],
-            decompile: ["modules/johns-cypher-addons/library/SFX/ability/enabler/decompile/decompile.ogg"]
+            decompile: ["modules/johns-cypher-addons/library/SFX/ability/enabler/decompile/decompile.ogg"],
+            immunity: ["modules/johns-cypher-addons/library/SFX/ability/enabler/immunity/immunity.ogg"]
         }
     },
     weapon: {
@@ -133,7 +236,7 @@ export const database = {
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_2.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_3.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/special/spores/special_spores_4.ogg"
-                        ]
+                ]
             },
             slashing: {
                 impact: {
@@ -144,7 +247,7 @@ export const database = {
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_4.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_5.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/armor/slashing_impact_armor_6.ogg"
-                        ],
+                    ],
                     flesh: [
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_1.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_2.ogg",
@@ -152,7 +255,7 @@ export const database = {
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_4.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_5.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/impacts/flesh/slashing_impact_flesh_6.ogg"
-                        ],
+                    ],
                 },
                 swings: {
                     light: {
@@ -168,7 +271,7 @@ export const database = {
                                 "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_6.ogg",
                                 "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_7.ogg",
                                 "modules/johns-cypher-addons/library/SFX/weapon/melee/slashing/swings/medium/sword/slashing_swing_medium_sword_8.ogg"
-                                ]
+                        ]
                     },
                     heavy: {}
                 }
@@ -183,7 +286,7 @@ export const database = {
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_5.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_6.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/armor/piercing_impact_armor_7.ogg"
-                            ],
+                    ],
                     flesh: [
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_1.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_2.ogg",
@@ -191,7 +294,7 @@ export const database = {
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_4.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_5.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/impacts/flesh/piercing_impact_flesh_6.ogg"
-                            ]
+                    ]
                 },
                 swings: {
                     light: {
@@ -221,7 +324,7 @@ export const database = {
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_4.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_5.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/melee/piercing/swings/medium/spear/piercing_swing_medium_spear_6.ogg"
-                            ]
+                        ]
                     },
                     heavy: {}
                 }
@@ -234,7 +337,7 @@ export const database = {
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_3.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_4.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/armor/bludgeoning_impact_armor_5.ogg"
-                        ],
+                    ],
                     flesh: [
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_1.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_2.ogg",
@@ -242,7 +345,7 @@ export const database = {
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_4.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_5.ogg",
                         "modules/johns-cypher-addons/library/SFX/weapon/melee/bludgeoning/impacts/flesh/bludgeoning_impact_flesh_6.ogg"
-                        ]
+                    ]
                 },
                 swings: {
                     light: {},
@@ -260,7 +363,7 @@ export const database = {
                             "modules/johns-cypher-addons/library/SFX/weapon/ranged/gun/pistol/fire/ranged_gun_pistol_fire_1.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/ranged/gun/pistol/fire/ranged_gun_pistol_fire_2.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/ranged/gun/pistol/fire/ranged_gun_pistol_fire_3.ogg"
-                            ]
+                    ]
                 }
             },
             archery: {
@@ -318,13 +421,21 @@ export const database = {
             },
             energy: {
                 laser: {
-                    fire: 
-                        [
+                    fire: [
                             "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/laser/fire/ranged_energy_laser_fire_1.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/laser/fire/ranged_energy_laser_fire_2.ogg",
                             "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/laser/fire/ranged_energy_laser_fire_3.ogg"
-                        ],
+                    ],
                     impact: []
+                },
+                onslaught: {
+                    charge: ["modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/onslaught/charge/onslaught_charge.ogg"],
+                    cast: [
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/onslaught/cast/onslaught_cast_1.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/onslaught/cast/onslaught_cast_2.ogg",
+                        "modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/onslaught/cast/onslaught_cast_3.ogg",
+                    ],
+                    pulse: ["modules/johns-cypher-addons/library/SFX/weapon/ranged/energy/onslaught/pulse/onslaught_pulse.ogg"]
                 }
             }
         }

@@ -51,7 +51,7 @@ export async function attack(data, user){
         let requiresAmmo = false;
         let ammoID = null;
         if(item.data.flags['johns-cypher-addons']?.additionalSettings){
-            pierceArmor = item.data.flags['johns-cypher-addons']?.additionalSettings.pierceArmor;
+            pierceArmor = item.data.flags['johns-cypher-addons']?.additionalSettings.piercesArmor;
             throwing = item.data.flags['johns-cypher-addons']?.additionalSettings.throwing;
             requiresAmmo = item.data.flags['johns-cypher-addons']?.additionalSettings.requiresAmmo;
             ammoID = item.data.flags['johns-cypher-addons']?.additionalSettings.ammoID;

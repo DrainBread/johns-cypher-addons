@@ -139,11 +139,10 @@ Hooks.on("ready", async function() {
             return;
 
         const user = game.users.get(data.user.id);
-        if(game.user.id != user.id)
+        if(game.user.id != user.id || game.user.isGM)
             return;
 
         AttackAddons.attack(data, user);
-        await socket.executeAsGM("defend", data)
     });
 
     Hooks.on("damageNPC", async function(actor, damage){
