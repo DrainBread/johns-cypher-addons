@@ -138,8 +138,8 @@ Hooks.on("ready", async function() {
         if(!data?.message?.roll)
             return;
 
-        const user = game.users.get(data.user.id);
-        if(game.user.id != user.id || game.user.isGM)
+        const user = game.users.get(data.message.user);
+        if(game.user.id != user.id)
             return;
 
         AttackAddons.attack(data, user);
