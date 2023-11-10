@@ -215,8 +215,6 @@ async function miss(target, animationMacroID, animationMacroArgs){
         new Sequence()
         .effect("jb2a.ui.miss.red")
             .atLocation(target)
-        .sound("johns-cypher-sfx.system.roll.failure.0")
-            .volume(.25)
         .play();
         
         if(animationMacroID){
