@@ -31,6 +31,9 @@ export const database = {
             }
         }
     },
+    effect: {
+        falling_rocks: "modules/johns-cypher-addons/library/SFX/effects/falling_rocks.ogg"
+    },
     voice: {
         pc: {},
         npc: {
