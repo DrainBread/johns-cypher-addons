@@ -171,6 +171,7 @@ export const database = {
     },
     ability: {
         action: {
+            flame_throw:["modules/johns-cypher-addons/library/SFX/ability/action/flame_throw/flame_throw.ogg"],
             spend_calamity: ["modules/johns-cypher-addons/library/SFX/ability/action/spend_calamity/spend_calamity.ogg"],
             spawn: ["modules/johns-cypher-addons/library/SFX/ability/action/spawn/spawn.ogg"],
             charge: ["modules/johns-cypher-addons/library/SFX/ability/action/charge/charge.ogg"],
